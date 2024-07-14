@@ -9,6 +9,8 @@ include 'components/nav.php';
 hello world
 home page
 aaaaaaaaaaaaaaaaaaa test test test
+12 2  
+24624688
 
 <?php
 
