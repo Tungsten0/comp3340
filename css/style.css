@@ -31,7 +31,7 @@ header {
 
 .logo {
     font-size: 2em;
-    color: #fff;
+    color: black;
     user-select: none;
 }
 
@@ -63,7 +63,7 @@ header {
     transform: scaleX(1);
 }
 
-.navigation .btnLogin-popup {
+.btnLogin-popup {
     width: 130px;
     height: 50px;
     background: transparent;
@@ -78,7 +78,7 @@ header {
     transition: .5s;
 }
 
-.navigation .btnLogin-popup:hover {
+.btnLogin-popup:hover {
     background: #fff;
     color: #162938;
 }
@@ -265,8 +265,8 @@ header {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 /* Modal Content */
@@ -298,21 +298,23 @@ header {
 
 
 #logoutBtn {
-    padding: 10px 20px;
-    background-color: #fff;
-    color: #162938;
-    border: none;
-    border-radius: 5px;
+    width: 130px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid #fff;
+    outline: none;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
-    text-transform: uppercase;
-    transition: background-color 0.3s, color 0.3s;
+    font-size: 1.1em;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 40px;
+    transition: .5s;
 }
 
 #logoutBtn:hover {
-    background-color: #162938;
-    color: #fff;
+    background: #fff;
+    color: #162938;
 }
 
 footer {
@@ -320,7 +322,7 @@ footer {
     bottom: 10px;
     right: 10px;
     font-size: 14px;
-    color: #666;
+    color: white;
 }
 
 footer p {
@@ -336,12 +338,15 @@ footer p {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: rgba(249, 249, 249, 0.8); /* Adjust the background color and transparency */
-    backdrop-filter: blur(10px); /* Apply the blur effect */
+    background-color: rgba(249, 249, 249, 0.8);
+    /* Adjust the background color and transparency */
+    backdrop-filter: blur(10px);
+    /* Apply the blur effect */
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-    margin-top: 5px; /* Adjust spacing from the link */
+    margin-top: 5px;
+    /* Adjust spacing from the link */
 }
 
 .dropdown-content a {
