@@ -8,6 +8,7 @@ include 'components/nav.php';
 
 hello world
 home page
+aaaaaaaaaaaaaaaaaaa test test test
 
 <?php
 
