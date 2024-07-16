@@ -363,3 +363,16 @@ footer p {
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
+#productForm {
+    margin: 30px 0 30px 0;
+}
+
+#submitBtn {
+    padding: 3px;
+}
+
+#submitBtn:hover,
+#submitBtn:focus {
+    background-color: lightblue;
+}

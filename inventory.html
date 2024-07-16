@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Inventory Management</h1>
+    </header>
+    <div class="container">
+        <form id="productForm">
+            <legend>
+                <h2>Adding Product:</h2>
+            </legend>
+            <input type="hidden" id="productId">
+            <label for="name">Product Name:</label>
+            <input type="text" id="name" required><br><br>
+            <label for="price">Price:</label>
+            <input type="number" type="text" id="price" step="0.1" required><br><br>
+            <button type="submit" id="submitBtn">Add Product</button>
+        </form>
+        <form id="productForm">
+            <legend>
+                <h2>Removing Product:</h2>
+            </legend>
+            <input type="hidden" id="productId">
+            <label for="name">Product Name:</label>
+            <input type="text" id="name" required><br><br>
+            <button type="submit" id="submitBtn">Remove Product</button>
+        </form>
+        <form id="productForm">
+            <legend>
+                <h2>Edit Product:</h2>
+            </legend>
+            <input type="hidden" id="productId">
+            <label for="name">Product to be Edited:</label>
+            <input type="text" id="name" required><br><br>
+            <label for="name">New Name:</label>
+            <input type="text" id="name" required><br><br>
+            <label for="price">New Price:</label>
+            <input type="number" type="text" id="price" step="0.1" required><br><br>
+            <button type="submit" id="submitBtn">Edit Product</button>
+        </form>
+
+        <div id="productList">
+            <!-- Product list will be dynamically populated here -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
