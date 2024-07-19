@@ -19,9 +19,13 @@
             </legend>
             <input type="hidden" id="productId">
             <label for="name">Product Name:</label>
-            <input type="text" id="name" required><br><br>
+            <input type="text" id="name" required>
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" required>
             <label for="price">Price:</label>
             <input type="number" type="text" id="price" step="0.1" required><br><br>
+            <label for="description">Description:</label>
+            <textarea id="description" name="description"></textarea><br><br>
             <button type="submit" id="submitBtn">Add Product</button>
         </form>
         <form id="productForm">
@@ -38,12 +42,16 @@
                 <h2>Edit Product:</h2>
             </legend>
             <input type="hidden" id="productId">
-            <label for="name">Product to be Edited:</label>
+            <label for="name">Product Name or ID:</label>
             <input type="text" id="name" required><br><br>
             <label for="name">New Name:</label>
-            <input type="text" id="name" required><br><br>
+            <input type="text" id="name" required>
+            <label for="quantity">New Quantity:</label>
+            <input type="number" id="quantity" required>
             <label for="price">New Price:</label>
             <input type="number" type="text" id="price" step="0.1" required><br><br>
+            <label for="description">Description:</label>
+            <textarea id="description" name="description"></textarea><br><br>
             <button type="submit" id="submitBtn">Edit Product</button>
         </form>
 
