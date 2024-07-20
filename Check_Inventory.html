@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Inventory</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .hidden {
+            display: none;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .button-group {
+            margin-top: 10px;
+        }
+        .button-group button {
+            margin-right: 10px;
+        }
+        .inventory-result {
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.getElementById('product-inventory-section').classList.add('hidden');
+            document.getElementById('inventory-result').classList.add('hidden');
+            document.getElementById('main-menu').classList.add('hidden');
+
+            // Show the selected section
+            document.getElementById(sectionId).classList.remove('hidden');
+        }
+
+        function handleInventorySubmit(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Get the form elements
+            const productNumberInput = document.getElementById('product-number');
+
+            // Retrieve the product number
+            const productNumber = productNumberInput.value;
+
+            // Check if product number is filled
+            if (!productNumber) {
+                alert('Please enter a product number.');
+                return;
+            }
+
+            // Simulate fetching inventory data (replace this with actual data fetching)
+            const inventoryData = {
+                "P001": [
+                    { "zone": "Z01", "number": "001", "level": "A", "quantity": 10 },
+                    { "zone": "Z02", "number": "003", "level": "B", "quantity": 5 }
+                ],
+                "P002": [
+                    { "zone": "Z01", "number": "002", "level": "C", "quantity": 20 },
+                    { "zone": "Z03", "number": "004", "level": "D", "quantity": 15 }
+                ]
+                // Add more example data as needed
+            };
+
+            const productData = inventoryData[productNumber] || [];
+
+            if (productData.length > 0) {
+                let totalQuantity = 0;
+                const tableBody = document.getElementById('inventory-table-body');
+                tableBody.innerHTML = ''; // Clear previous data
+
+                productData.forEach(item => {
+                    totalQuantity += item.quantity;
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${item.zone}</td>
+                        <td>${item.number}</td>
+                        <td>${item.level}</td>
+                        <td>${item.quantity}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+
+                document.getElementById('total-quantity').textContent = `Total Quantity: ${totalQuantity}`;
+                document.getElementById('inventory-result').classList.remove('hidden');
+            } else {
+                alert('No inventory data found for the given product number.');
+                document.getElementById('inventory-result').classList.add('hidden');
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <div id="main-menu">
+        <h1>Warehouse Management</h1>
+        <div class="options">
+            <!-- Other options -->
+            <button onclick="showSection('product-inventory-section')">Product Inventory</button>
+        </div>
+    </div>
+
+    <div id="product-inventory-section" class="hidden">
+        <h1>Product Inventory</h1>
+        <form onsubmit="handleInventorySubmit(event)">
+            <div class="form-group">
+                <label for="product-number">Product Number:</label>
+                <input type="text" id="product-number" name="product-number" placeholder="Enter product number" required>
+            </div>
+            <div class="button-group">
+                <button type="submit">Check Inventory</button>
+                <button type="button" onclick="showSection('main-menu')">Return to Main Menu</button>
+            </div>
+        </form>
+        <div id="inventory-result" class="hidden">
+            <h2>Inventory Details</h2>
+            <p id="total-quantity"></p>
+            <table>
+                <thead>
+                <tr>
+                    <th>Zone</th>
+                    <th>Storage Number</th>
+                    <th>Storage Level</th>
+                    <th>Quantity</th>
+                </tr>
+                </thead>
+                <tbody id="inventory-table-body">
+                <!-- Data will be populated here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
