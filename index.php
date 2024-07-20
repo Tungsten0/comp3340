@@ -6,7 +6,8 @@ $request = $_SERVER['REQUEST_URI'];
 if (isset($_COOKIE['user_id'])) {
   // The user_id cookie has been set
   $user_id = $_COOKIE['user_id'];
-  echo "User ID: " . htmlspecialchars($user_id);
+  ?> <script>console.log("User ID: " + <?php echo $user_id; ?>);</script> <?php
+  //echo "User ID: " . htmlspecialchars($user_id);
   switch ($request) {
     case '/login' :
       require __DIR__ . '/pages/login.php';
@@ -18,6 +19,7 @@ if (isset($_COOKIE['user_id'])) {
   }
 } else {
   // The user_id cookie has not been set
-  echo "User ID cookie is not set.";
+  ?> <script>console.log("User ID cookie is not set.");</script> <?php
+  //echo "User ID cookie is not set.";
   require __DIR__ . '/pages/login.php';
 }
