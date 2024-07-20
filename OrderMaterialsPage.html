@@ -23,10 +23,27 @@
             min-height: 70px;
             border-bottom: #ccc 3px solid;
             text-align: center;
+            position: relative; /* Added */
         }
         header h1 {
             margin: 0;
             font-size: 24px;
+        }
+        .return-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .return-button:hover {
+            background-color: #555;
         }
         .order-form {
             background: #fff;
@@ -63,13 +80,13 @@
         }
         .form-group textarea {
             height: 100px;
-            resize: vertical; 
+            resize: vertical;
         }
         .form-group input[type="datetime-local"] {
             cursor: not-allowed;
         }
         .form-group input[type="number"] {
-            -moz-appearance: textfield; /* for Firefox */ 
+            -moz-appearance: textfield; /* for Firefox */
             -webkit-appearance: none; /* for Safari and Chrome */
             appearance: none; /* Standard */
         }
@@ -115,134 +132,136 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Material Order Form</h1>
-        </div>
-    </header>
-    
+<header>
     <div class="container">
-        <div class="order-form">
-            <h2>Place an Order</h2>
-            <form action="/submit-order" method="post" id="order-form">
-                <div class="form-group">
-                    <label for="order-id">Order ID</label>
-                    <input type="text" id="order-id" name="order_id" readonly>
-                </div>
+        <a href="dashboard.html" class="return-button">Return</a>
+        <h1>Material Order Form</h1>
+    </div>
+</header>
 
-                <div class="form-group">
-                    <label for="department" class="required">Department Name</label>
-                    <input type="text" id="department" name="department" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="order-datetime">Order Date and Time</label>
-                    <input type="datetime-local" id="order-datetime" name="order_datetime" required readonly>
-                </div>
-                
-                <div class="form-group">
-                    <label for="product" class="required">Select Material</label>
-                    <select id="product" name="product" required>
-                        <option value="">Select a product</option>
-                        <option value="product1">Product 1</option>
-                        <option value="product2">Product 2</option>
-                        <option value="product3">Product 3</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="quantity" class="required">Quantity of Material</label>
-                    <input type="number" id="quantity" name="quantity" min="1" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="additional-info">Additional Information</label>
-                    <textarea id="additional-info" name="additional_info" placeholder="Add any additional information here..."></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <input type="submit" value="Place Order" id="submit-button">
-                </div>
-
-                <!-- message for mandatory fields -->
-                <div class="form-message">
-                    <span>* fields need to be filled in before form submission.</span>
-                </div>
-            </form>
-
-            <!-- implementing a progress bar -->
-            <div class="progress-bar-container">
-                <div class="progress-bar" id="progress-bar"></div>
+<div class="container">
+    <div class="order-form">
+        <h2>Place an Order</h2>
+        <form action="/submit-order" method="post" id="order-form">
+            <div class="form-group">
+                <label for="order-id">Order ID</label>
+                <input type="text" id="order-id" name="order_id" readonly>
             </div>
+
+            <div class="form-group">
+                <label for="department" class="required">Department Name</label>
+                <input type="text" id="department" name="department" required>
+            </div>
+
+            <div class="form-group">
+                <label for="order-datetime">Order Date and Time</label>
+                <input type="datetime-local" id="order-datetime" name="order_datetime" required readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="product" class="required">Select Material</label>
+                <select id="product" name="product" required>
+                    <option value="">Select a product</option>
+                    <option value="product1">Product 1</option>
+                    <option value="product2">Product 2</option>
+                    <option value="product3">Product 3</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="quantity" class="required">Quantity of Material</label>
+                <input type="number" id="quantity" name="quantity" min="1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="additional-info">Additional Information</label>
+                <textarea id="additional-info" name="additional_info" placeholder="Add any additional information here..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Place Order" id="submit-button">
+            </div>
+
+            <!-- message for mandatory fields -->
+            <div class="form-message">
+                <span>* fields need to be filled in before form submission.</span>
+            </div>
+        </form>
+
+        <!-- implementing a progress bar -->
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progress-bar"></div>
         </div>
     </div>
+</div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const orderDateTimeInput = document.getElementById('order-datetime');
-            const orderIdInput = document.getElementById('order-id');
-            const submitButton = document.getElementById('submit-button');
-            const form = document.getElementById('order-form');
-            const progressBar = document.getElementById('progress-bar');
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const orderDateTimeInput = document.getElementById('order-datetime');
+        const orderIdInput = document.getElementById('order-id');
+        const submitButton = document.getElementById('submit-button');
+        const form = document.getElementById('order-form');
+        const progressBar = document.getElementById('progress-bar');
 
-            const now = new Date();
-            
-            // convert time to Eastern Time Zone (ET) 
-            const offset = -5; // adjust so it is accurate in case it shows the wrong time
-            const easternTime = new Date(now.getTime() + offset * 60 * 60 * 1000);
-            easternTime.setHours(easternTime.getHours() + 9);
-            
-            // format to match the `datetime-local` input format
-            const year = easternTime.getFullYear();
-            const month = String(easternTime.getMonth() + 1).padStart(2, '0');
-            const day = String(easternTime.getDate()).padStart(2, '0');
-            const hours = String(easternTime.getHours()).padStart(2, '0');
-            const minutes = String(easternTime.getMinutes()).padStart(2, '0');
-            const dateTimeString = `${year}-${month}-${day}T${hours}:${minutes}`;
-            
-            orderDateTimeInput.value = dateTimeString;
+        const now = new Date();
 
-            // retrieve the last Order ID from localStorage or start with 0000000
-            let lastOrderId = localStorage.getItem('lastOrderId');
-            if (lastOrderId === null) {
-                lastOrderId = '0000000';
+        // convert time to Eastern Time Zone (ET)
+        const offset = -5; // adjust so it is accurate in case it shows the wrong time
+        const easternTime = new Date(now.getTime() + offset * 60 * 60 * 1000);
+        easternTime.setHours(easternTime.getHours() + 9);
+
+        // format to match the `datetime-local` input format
+        const year = easternTime.getFullYear();
+        const month = String(easternTime.getMonth() + 1).padStart(2, '0');
+        const day = String(easternTime.getDate()).padStart(2, '0');
+        const hours = String(easternTime.getHours()).padStart(2, '0');
+        const minutes = String(easternTime.getMinutes()).padStart(2, '0');
+        const dateTimeString = `${year}-${month}-${day}T${hours}:${minutes}`;
+
+        orderDateTimeInput.value = dateTimeString;
+
+        // retrieve the last Order ID from localStorage or start with 0000000
+        let lastOrderId = localStorage.getItem('lastOrderId');
+        if (lastOrderId === null) {
+            lastOrderId = '0000000';
+        } else {
+            lastOrderId = String(parseInt(lastOrderId) + 1).padStart(7, '0');
+        }
+
+        // saving the new Order ID back to localStorage
+        localStorage.setItem('lastOrderId', lastOrderId);
+
+        orderIdInput.value = lastOrderId;
+
+        // enable/disable the submit button based on form validity
+        const updateButtonState = () => {
+            if (form.checkValidity()) {
+                submitButton.classList.add('enabled');
+                submitButton.disabled = false;
+                updateProgressBar(3); // All fields are filled
             } else {
-                lastOrderId = String(parseInt(lastOrderId) + 1).padStart(7, '0');
+                const requiredFields = [ 'department', 'product', 'quantity' ];
+                const filledFields = requiredFields.filter(fieldId => {
+                    return document.getElementById(fieldId).value.trim() !== '';
+                }).length;
+                updateProgressBar(filledFields);
+                submitButton.classList.remove('enabled');
+                submitButton.disabled = true;
             }
+        };
 
-            // saving the new Order ID back to localStorage
-            localStorage.setItem('lastOrderId', lastOrderId);
+        const updateProgressBar = (completedFields) => {
+            const percentages = [0, 33, 66, 100];
+            progressBar.style.width = `${percentages[completedFields]}%`;
+        };
 
-            orderIdInput.value = lastOrderId;
+        // listen for input changes and update button state
+        form.addEventListener('input', updateButtonState);
 
-            // enable/disable the submit button based on form validity
-            const updateButtonState = () => {
-                if (form.checkValidity()) {
-                    submitButton.classList.add('enabled');
-                    submitButton.disabled = false;
-                    updateProgressBar(3); // All fields are filled
-                } else {
-                    const requiredFields = [ 'department', 'product', 'quantity' ];
-                    const filledFields = requiredFields.filter(fieldId => {
-                        return document.getElementById(fieldId).value.trim() !== '';
-                    }).length;
-                    updateProgressBar(filledFields);
-                    submitButton.classList.remove('enabled');
-                    submitButton.disabled = true;
-                }
-            };
-
-            const updateProgressBar = (completedFields) => {
-                const percentages = [0, 33, 66, 100];
-                progressBar.style.width = `${percentages[completedFields]}%`;
-            };
-
-            // listen for input changes and update button state
-            form.addEventListener('input', updateButtonState);
-
-            // initializing button state
-            updateButtonState();
-        });
-    </script>
+        // initializing button state
+        updateButtonState();
+    });
+</script>
 </body>
 </html>
+
