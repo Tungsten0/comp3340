@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Picking Queue</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .hidden {
+      display: none;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .button-group {
+      margin-top: 10px;
+    }
+    .button-group button {
+      margin-right: 10px;
+    }
+    .info-section {
+      margin-top: 20px;
+    }
+    .status-bar {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    table, th, td {
+      border: 1px solid black;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+  </style>
+  <script>
+    let queue = [];
+    let currentIndex = 0;
+
+    async function fetchQueue() {
+      try {
+        const response = await fetch('/api/picking-queue');
+        if (!response.ok) throw new Error('Network response was not ok');
+
+        const data = await response.json();
+        queue = data.queue;
+        displayCurrentItem();
+      } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred while fetching the queue.');
+      }
+    }
+
+    function displayCurrentItem() {
+      if (queue.length === 0 || currentIndex >= queue.length) {
+        alert('No more items in the queue.');
+        return;
+      }
+
+      const item = queue[currentIndex];
+      document.getElementById('product-number').textContent = item.productNumber;
+      document.getElementById('quantity-requested').textContent = item.quantityRequested;
+      document.getElementById('storage-location').textContent = `${item.zone}-${item.number}-${item.level}`;
+      document.getElementById('barcode').value = '';
+      document.getElementById('delivery-location').value = '';
+      document.getElementById('current-position').textContent = `${currentIndex + 1}/${queue.length}`;
+      document.getElementById('confirm-section').classList.remove('hidden');
+      document.getElementById('delivery-section').classList.add('hidden');
+    }
+
+    async function handleBarcodeConfirmation(event) {
+      event.preventDefault();
+      const barcode = document.getElementById('barcode').value;
+
+      if (!barcode) {
+        alert('Please enter a valid barcode.');
+        return;
+      }
+
+      try {
+        const response = await fetch('/api/confirm-barcode', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ barcode, productNumber: queue[currentIndex].productNumber })
+        });
+
+        if (!response.ok) throw new Error('Network response was not ok');
+
+        const data = await response.json();
+
+        if (data.success) {
+          document.getElementById('confirm-section').classList.add('hidden');
+          document.getElementById('delivery-section').classList.remove('hidden');
+        } else {
+          alert(data.error || 'An error occurred.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred while confirming the barcode.');
+      }
+    }
+
+    async function handleDeliveryConfirmation() {
+      const deliveryLocation = document.getElementById('delivery-location').value;
+
+      if (!deliveryLocation) {
+        alert('Please enter a delivery location.');
+        return;
+      }
+
+      try {
+        const response = await fetch('/api/confirm-delivery', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ productNumber: queue[currentIndex].productNumber, deliveryLocation })
+        });
+
+        if (!response.ok) throw new Error('Network response was not ok');
+
+        const data = await response.json();
+
+        if (data.success) {
+          currentIndex++;
+          displayCurrentItem();
+        } else {
+          alert(data.error || 'An error occurred.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred while confirming the delivery location.');
+      }
+    }
+
+    window.onload = fetchQueue;
+  </script>
+</head>
+<body>
+<div class="container">
+  <h1>Picking Queue</h1>
+  <div class="status-bar" id="current-position">1/0</div>
+  <div id="confirm-section">
+    <h2>Product Details</h2>
+    <table>
+      <thead>
+      <tr>
+        <th>Product Number</th>
+        <th>Quantity Requested</th>
+        <th>Storage Location</th>
+        <th>Barcode</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td id="product-number"></td>
+        <td id="quantity-requested"></td>
+        <td id="storage-location"></td>
+        <td>
+          <form onsubmit="handleBarcodeConfirmation(event)">
+            <input type="text" id="barcode" name="barcode" placeholder="Enter barcode" required>
+            <button type="submit">Confirm Barcode</button>
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="delivery-section" class="hidden">
+    <h2>Delivery Details</h2>
+    <form onsubmit="handleDeliveryConfirmation()">
+      <div class="form-group">
+        <label for="delivery-location">Delivery Location:</label>
+        <input type="text" id="delivery-location" name="delivery-location" placeholder="Enter delivery location" required>
+      </div>
+      <div class="button-group">
+        <button type="submit">Confirm to Delivery Location</button>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>
