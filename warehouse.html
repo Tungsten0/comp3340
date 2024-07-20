@@ -15,6 +15,9 @@
         .button-group button {
             margin-right: 10px;
         }
+        .warehouse-info {
+            margin-top: 20px;
+        }
     </style>
     <script>
         function showSection(sectionId) {
@@ -23,6 +26,7 @@
             document.getElementById('create-section').classList.add('hidden');
             document.getElementById('edit-section').classList.add('hidden');
             document.getElementById('remove-section').classList.add('hidden');
+            document.getElementById('current-warehouse-section').classList.add('hidden');
 
             // Show the selected section
             document.getElementById(sectionId).classList.remove('hidden');
@@ -141,6 +145,32 @@
                 document.getElementById('edit-location-details').classList.add('hidden');
             }
         }
+
+        function showCurrentWarehouse() {
+            // Simulate fetching current warehouse data
+            // For demonstration, we use static values. Replace this with actual data fetching.
+            const currentData = [
+                { zone: "Z01", number: "001", level: "A", indicator: "A" },
+                { zone: "Z02", number: "002", level: "B", indicator: "B" }
+                // Add more current data as needed
+            ];
+
+            const tableBody = document.getElementById('current-warehouse-table-body');
+            tableBody.innerHTML = ''; // Clear previous data
+
+            currentData.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.zone}</td>
+                    <td>${item.number}</td>
+                    <td>${item.level}</td>
+                    <td>${item.indicator}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            document.getElementById('current-warehouse-section').classList.remove('hidden');
+        }
     </script>
 </head>
 <body>
@@ -151,6 +181,7 @@
             <button onclick="showSection('create-section')">Create Warehouse</button>
             <button onclick="showSection('edit-section')">Edit Warehouse</button>
             <button onclick="showSection('remove-section')">Remove Warehouse</button>
+            <button onclick="showCurrentWarehouse()">See Current Warehouse</button>
         </div>
     </div>
 
@@ -287,6 +318,25 @@
             </div>
         </form>
     </div>
+
+    <div id="current-warehouse-section" class="hidden">
+        <h1>Current Warehouse</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>Zone</th>
+                <th>Storage Number</th>
+                <th>Level</th>
+                <th>Indicator</th>
+            </tr>
+            </thead>
+            <tbody id="current-warehouse-table-body">
+            <!-- Data will be populated here -->
+            </tbody>
+        </table>
+        <button type="button" onclick="showSection('main-menu')">Return to Main Menu</button>
+    </div>
 </div>
 </body>
 </html>
+
