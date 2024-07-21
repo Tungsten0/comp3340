@@ -1,0 +1,191 @@
+<<<<<<< HEAD:admin_dashboard.html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="css/style.css"> <!-- Link to your CSS file -->
+</head>
+
+<body>
+    <header>
+        <h1>Welcome Admin</h1>
+        <nav class="navigation">
+            <a href="OrderMaterialsPage.html">Order Material</a>
+            <a href="user_dashboard.html">View Order Queue</a>
+            <a href="Check_Inventory.html">Search Inventory</a>
+            <div class="dropdown">
+                <a href="#">Manage</a>
+                <div class="dropdown-content">
+                    <a href="#">Users</a>
+                    <a href="inventory.html">Products</a>
+                    <a href="#">Inventory</a>
+                    <a href="warehouse.html">Warehouse</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#">Reports</a>
+                <div class="dropdown-content">
+                    <a href="#">Inventory Reports</a>
+                </div>
+            </div>
+        </nav>
+        <button id="logoutBtn">Logout</button>
+    </header>
+
+
+    <div class="wrapper">
+        <span class="icon-close">
+            <ion-icon name="close-outline"></ion-icon>
+        </span>
+        <div class="form-box login">
+            <h2>Login</h2>
+            <form action="#">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+                    <input type="email" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+                    <input type="password" required>
+                    <label>Password</label>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+        </div>
+
+        <div class="form-box register">
+            <h2>Registration</h2>
+            <form action="#">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+                    <input type="text" required>
+                    <label>Username</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+                    <input type="email" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+                    <input type="password" required>
+                    <label>Password</label>
+                </div>
+                <button type="submit" class="btn">Register</button>
+            </form>
+        </div>
+    </div>
+
+
+
+    <footer>
+        <p>&copy; 2024 Your Company</p>
+    </footer>
+
+    <script src="script.js"></script> <!-- Link to your JavaScript file -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+
+=======
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="css/style.css"> <!-- Link to your CSS file -->
+</head>
+
+<body>
+    <header>
+        <h1>Welcome Admin</h1>
+        <nav class="navigation">
+            <a href="#" class="active">Dashboard</a>
+            <a href="#">Order Material</a>
+            <a href="#">Order Queue</a>
+            <a href="#">Search Inventory</a>
+            <div class="dropdown">
+                <a href="#">Manage</a>
+                <div class="dropdown-content">
+                    <a href="#">Users</a>
+                    <a href="#">Products</a>
+                    <a href="#">Inventory</a>
+                    <a href="#">Warehouse</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#">Reports</a>
+                <div class="dropdown-content">
+                    <a href="#">Inventory Reports</a>
+                </div>
+            </div>
+        </nav>
+        <button id="logoutBtn">Logout</button>
+    </header>
+
+
+    <div class="wrapper">
+        <span class="icon-close">
+            <ion-icon name="close-outline"></ion-icon>
+        </span>
+        <div class="form-box login">
+            <h2>Login</h2>
+            <form action="#">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+                    <input type="email" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+                    <input type="password" required>
+                    <label>Password</label>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+        </div>
+
+        <div class="form-box register">
+            <h2>Registration</h2>
+            <form action="#">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+                    <input type="text" required>
+                    <label>Username</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+                    <input type="email" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+                    <input type="password" required>
+                    <label>Password</label>
+                </div>
+                <button type="submit" class="btn">Register</button>
+            </form>
+        </div>
+    </div>
+
+
+
+    <footer>
+        <p>&copy; 2024 Your Company</p>
+    </footer>
+
+    <script src="script.js"></script> <!-- Link to your JavaScript file -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+
+>>>>>>> 2e3f37a68836d349505c686be37ea0711e1938da:pages/admin_dashboard.html
+</html>
