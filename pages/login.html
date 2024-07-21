@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Group A Project</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
@@ -29,15 +29,15 @@
     <!-- Login Form -->
     <div class="form-box login">
       <h2>Login</h2>
-      <form action="#">
+      <form action="../php/login.php" method="POST">
         <div class="input-box">
           <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
-          <input type="email" required>
+          <input name="email" type="email" required>
           <label>Email</label>
         </div>
         <div class="input-box">
           <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-          <input type="password" required>
+          <input name="password" type="password" required>
           <label>Password</label>
         </div>
         <div class="remember-forgot">
@@ -54,7 +54,7 @@
     <!-- Registration Form -->
     <div class="form-box register">
       <h2>Registration</h2>
-      <form action="#">
+      <form aaction="../php/register.php" method="POST">
         <div class="input-box">
           <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
           <input type="text" required>
@@ -131,7 +131,7 @@
     </div>
   </div>
 
-  <script src="scripts/script.js"></script>
+  <script src="../scripts/script.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
