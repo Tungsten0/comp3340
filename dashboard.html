@@ -11,9 +11,9 @@
 <header>
     <h1>Welcome User</h1>
     <nav class="navigation">
-        <a href="user_dashboard.html" id="dashboardLink">Dashboard</a>
+        <a href="user_dashboard.html" id="dashboardLink">View Order Queue</a>
         <a href="OrderMaterialsPage.html">Order Material</a>
-        <a href="#">Profile</a>
+        <a href="Profile_Edit.html">Profile</a>
     </nav>
     <button id="logoutBtn">Logout</button>
 </header>
@@ -25,5 +25,11 @@
 <script src="scripts/script.js"></script> <!-- Link to your JavaScript file -->
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script>
+    // Add this script to your existing JavaScript file or within a script tag in your HTML
+    document.getElementById('logoutBtn').addEventListener('click', function() {
+        window.location.href = 'index.html';
+    });
+</script>
 </body>
 </html>

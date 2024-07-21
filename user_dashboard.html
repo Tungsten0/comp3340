@@ -6,20 +6,127 @@
     <title>Items on Order Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/dashboard_style.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('media/background.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .dashboard-container {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
+            border-radius: 8px;
+            max-width: 900px;
+            margin: 20px auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333; /* Dark text for better readability */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            font-size: 16px;
+        }
+        th {
+            background-color: #f4f4f4;
+            font-weight: 600;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9; /* Alternate row background color */
+        }
+        tbody tr:hover {
+            background-color: #f1f1f1; /* Highlight row on hover */
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .return-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+        }
+        .return-button:hover {
+            background-color: #45a049;
+        }
+        #no-items-message {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #555; /* Slightly lighter color for the no items message */
+        }
+    </style>
 </head>
 <body>
 <div class="dashboard-container">
     <h1><span id="user-name">User</span></h1>
     <h2>Items on Order</h2>
-    <ul id="items-list">
+    <table id="items-table">
+        <thead>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Delivery Location</th>
+        </tr>
+        </thead>
+        <tbody id="items-list">
         <!-- Items will be dynamically added here -->
-    </ul>
+        </tbody>
+    </table>
     <p id="no-items-message" style="display: none;">No Items on Order</p>
 </div>
 <!-- Button Container -->
 <div class="button-container">
-    <button onclick="location.href='dashboard.html'" class="return-button">Return</button>
+    <button onclick="location.href='dashboard.html'" class="return-button">Return to Main Menu</button>
 </div>
 <script src="scripts/dashboard_script.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const itemsList = document.getElementById('items-list');
+        const noItemsMessage = document.getElementById('no-items-message');
+
+        // Example data - replace with actual data fetching logic
+        const items = [
+            { product: 'Widget A', quantity: 10, location: 'Warehouse 1' },
+            { product: 'Widget B', quantity: 5, location: 'Warehouse 2' },
+            // Add more items as needed
+        ];
+
+        if (items.length === 0) {
+            noItemsMessage.style.display = 'block';
+            itemsList.style.display = 'none';
+        } else {
+            noItemsMessage.style.display = 'none';
+            itemsList.style.display = 'table-row-group'; // Ensures table rows are displayed correctly
+
+            items.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.product}</td>
+                    <td>${item.quantity}</td>
+                    <td>${item.location}</td>
+                `;
+                itemsList.appendChild(row);
+            });
+        }
+    });
+</script>
 </body>
 </html>

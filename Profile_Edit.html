@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            background: url('media/background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+        }
+        .container {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8); /* Slightly transparent background for readability */
+            border-radius: 8px;
+            max-width: 800px;
+            margin: auto;
+            margin-top: 20px; /* Space above the container */
+            transition: max-height 0.3s ease-out; /* Smooth expansion */
+            overflow: hidden; /* Hide overflow content */
+        }
+        .container.expanded {
+            max-height: 600px; /* Adjust to fit content */
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left; /* Align labels and inputs to the left */
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Ensure padding and border are included in the width */
+        }
+        .form-group.hidden {
+            display: none;
+        }
+        .button-group {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .button-group button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .button-group button:hover {
+            background-color: #45a049;
+        }
+        .change-password-button {
+            background-color: #2196F3;
+            color: white;
+        }
+        .change-password-button:hover {
+            background-color: #1976D2;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+
+        }
+        .return-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+        }
+        .return-button:hover {
+            background-color: #45a049;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Edit Profile</h1>
+</header>
+<div class="container">
+    <form id="editProfileForm">
+        <div class="form-group">
+            <label for="first-name">First Name:</label>
+            <input type="text" id="first-name" name="first-name" value="John" readonly>
+        </div>
+        <div class="form-group">
+            <label for="last-name">Last Name:</label>
+            <input type="text" id="last-name" name="last-name" value="Doe" readonly>
+        </div>
+        <div class="form-group">
+            <label for="employee-number">Employee Number:</label>
+            <input type="text" id="employee-number" name="employee-number" value="12345" readonly>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="john.doe@example.com" readonly>
+        </div>
+        <!-- Hidden fields initially -->
+        <div class="form-group hidden" id="old-password-group">
+            <label for="old-password">Old Password:</label>
+            <input type="password" id="old-password" name="old-password" placeholder="Enter old password">
+        </div>
+        <div class="form-group hidden" id="new-password-group">
+            <label for="new-password">New Password:</label>
+            <input type="password" id="new-password" name="new-password" placeholder="Enter new password">
+        </div>
+        <div class="form-group hidden" id="confirm-password-group">
+            <label for="confirm-password">Confirm Password:</label>
+            <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm new password">
+        </div>
+        <div class="error-message hidden" id="password-error"></div>
+        <div class="button-group">
+            <button type="submit">Update Profile</button>
+            <button type="button" id="change-password-btn" class="change-password-button">Change Password</button>
+        </div>
+    </form>
+</div>
+
+<!-- Return Button at the Bottom -->
+<footer>
+    <div class="button-container">
+        <a href="dashboard.html" class="return-button">Return to Profile</a>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const changePasswordBtn = document.getElementById('change-password-btn');
+        const oldPasswordGroup = document.getElementById('old-password-group');
+        const newPasswordGroup = document.getElementById('new-password-group');
+        const confirmPasswordGroup = document.getElementById('confirm-password-group');
+        const container = document.querySelector('.container');
+        const passwordError = document.getElementById('password-error');
+
+        changePasswordBtn.addEventListener('click', function() {
+            if (oldPasswordGroup.classList.contains('hidden')) {
+                oldPasswordGroup.classList.remove('hidden');
+                newPasswordGroup.classList.remove('hidden');
+                confirmPasswordGroup.classList.remove('hidden');
+                container.classList.add('expanded');
+                changePasswordBtn.textContent = 'Hide Password Fields';
+            } else {
+                oldPasswordGroup.classList.add('hidden');
+                newPasswordGroup.classList.add('hidden');
+                confirmPasswordGroup.classList.add('hidden');
+                container.classList.remove('expanded');
+                changePasswordBtn.textContent = 'Change Password';
+                passwordError.classList.add('hidden');
+            }
+        });
+
+        document.getElementById('editProfileForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Password fields
+            const oldPassword = document.getElementById('old-password').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            // Regular expression for password complexity
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+            if (newPassword !== confirmPassword) {
+                passwordError.textContent = 'New Password and Confirm Password do not match.';
+                passwordError.classList.remove('hidden');
+                return;
+            }
+
+            if (!passwordRegex.test(newPassword)) {
+                passwordError.textContent = 'Password must be at least 8 characters long, contain one uppercase letter, one lowercase letter, one number, and one special character.';
+                passwordError.classList.remove('hidden');
+                return;
+            } else {
+                passwordError.classList.add('hidden');
+            }
+
+            // Handle form submission logic here
+            // You can use JavaScript to validate and send the form data to the server
+
+            alert('Profile updated successfully!');
+        });
+    });
+</script>
+</body>
+</html>

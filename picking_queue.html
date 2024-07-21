@@ -4,8 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Picking Queue</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/styles.css">
   <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: url('media/background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+    }
+    .container {
+      flex: 1;
+      padding: 20px;
+      border-radius: 8px;
+      position: relative;
+    }
     .hidden {
       display: none;
     }
@@ -18,17 +33,32 @@
     .button-group button {
       margin-right: 10px;
     }
-    .info-section {
-      margin-top: 20px;
-    }
     .status-bar {
       position: absolute;
       top: 10px;
       right: 20px;
     }
+    .table-wrapper {
+      position: relative;
+      display: inline-block;
+      width: 100%; /* Ensure it covers the full width */
+    }
+    .table-blur {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.5); /* Slight background to help with readability */
+      backdrop-filter: blur(10px);
+      border-radius: 8px;
+      z-index: 1;
+    }
     table {
       width: 100%;
       border-collapse: collapse;
+      position: relative; /* Ensure the table is above the blur effect */
+      z-index: 2;
     }
     table, th, td {
       border: 1px solid black;
@@ -36,6 +66,30 @@
     th, td {
       padding: 8px;
       text-align: left;
+    }
+    .return-button-container {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .return-button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+    }
+    .return-button:hover {
+      background-color: #45a049;
+    }
+    .error-message {
+      color: red;
+      font-size: 16px;
+      margin-bottom: 20px;
     }
   </style>
   <script>
@@ -49,16 +103,20 @@
 
         const data = await response.json();
         queue = data.queue;
-        displayCurrentItem();
+        if (queue.length === 0) {
+          showError('There are no orders currently.');
+        } else {
+          displayCurrentItem();
+        }
       } catch (error) {
+        showError('An error occurred while fetching the queue.');
         console.error('Error:', error);
-        alert('An error occurred while fetching the queue.');
       }
     }
 
     function displayCurrentItem() {
       if (queue.length === 0 || currentIndex >= queue.length) {
-        alert('No more items in the queue.');
+        showError('No more items in the queue.');
         return;
       }
 
@@ -71,6 +129,7 @@
       document.getElementById('current-position').textContent = `${currentIndex + 1}/${queue.length}`;
       document.getElementById('confirm-section').classList.remove('hidden');
       document.getElementById('delivery-section').classList.add('hidden');
+      clearError();
     }
 
     async function handleBarcodeConfirmation(event) {
@@ -78,7 +137,7 @@
       const barcode = document.getElementById('barcode').value;
 
       if (!barcode) {
-        alert('Please enter a valid barcode.');
+        showError('Please enter a valid barcode.');
         return;
       }
 
@@ -96,12 +155,13 @@
         if (data.success) {
           document.getElementById('confirm-section').classList.add('hidden');
           document.getElementById('delivery-section').classList.remove('hidden');
+          clearError();
         } else {
-          alert(data.error || 'An error occurred.');
+          showError(data.error || 'An error occurred.');
         }
       } catch (error) {
+        showError('An error occurred while confirming the barcode.');
         console.error('Error:', error);
-        alert('An error occurred while confirming the barcode.');
       }
     }
 
@@ -109,7 +169,7 @@
       const deliveryLocation = document.getElementById('delivery-location').value;
 
       if (!deliveryLocation) {
-        alert('Please enter a delivery location.');
+        showError('Please enter a delivery location.');
         return;
       }
 
@@ -128,12 +188,24 @@
           currentIndex++;
           displayCurrentItem();
         } else {
-          alert(data.error || 'An error occurred.');
+          showError(data.error || 'An error occurred.');
         }
       } catch (error) {
+        showError('An error occurred while confirming the delivery location.');
         console.error('Error:', error);
-        alert('An error occurred while confirming the delivery location.');
       }
+    }
+
+    function showError(message) {
+      const errorMessageDiv = document.getElementById('error-message');
+      errorMessageDiv.textContent = message;
+      errorMessageDiv.classList.remove('hidden');
+    }
+
+    function clearError() {
+      const errorMessageDiv = document.getElementById('error-message');
+      errorMessageDiv.textContent = '';
+      errorMessageDiv.classList.add('hidden');
     }
 
     window.onload = fetchQueue;
@@ -143,31 +215,36 @@
 <div class="container">
   <h1>Picking Queue</h1>
   <div class="status-bar" id="current-position">1/0</div>
+  <!-- Error message area -->
+  <div id="error-message" class="error-message hidden"></div>
   <div id="confirm-section">
     <h2>Product Details</h2>
-    <table>
-      <thead>
-      <tr>
-        <th>Product Number</th>
-        <th>Quantity Requested</th>
-        <th>Storage Location</th>
-        <th>Barcode</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td id="product-number"></td>
-        <td id="quantity-requested"></td>
-        <td id="storage-location"></td>
-        <td>
-          <form onsubmit="handleBarcodeConfirmation(event)">
-            <input type="text" id="barcode" name="barcode" placeholder="Enter barcode" required>
-            <button type="submit">Confirm Barcode</button>
-          </form>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+    <div class="table-wrapper">
+      <div class="table-blur"></div> <!-- Blur effect container -->
+      <table>
+        <thead>
+        <tr>
+          <th>Product Number</th>
+          <th>Quantity Requested</th>
+          <th>Storage Location</th>
+          <th>Barcode</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td id="product-number"></td>
+          <td id="quantity-requested"></td>
+          <td id="storage-location"></td>
+          <td>
+            <form onsubmit="handleBarcodeConfirmation(event)">
+              <input type="text" id="barcode" name="barcode" placeholder="Enter barcode" required>
+              <button type="submit">Confirm Barcode</button>
+            </form>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
   <div id="delivery-section" class="hidden">
     <h2>Delivery Details</h2>
@@ -180,6 +257,10 @@
         <button type="submit">Confirm to Delivery Location</button>
       </div>
     </form>
+  </div>
+  <!-- Return Button -->
+  <div class="return-button-container">
+    <a href="material_handler_dashboard.html" class="return-button">Return to Main Menu</a>
   </div>
 </div>
 </body>
