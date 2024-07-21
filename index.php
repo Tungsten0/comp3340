@@ -21,5 +21,6 @@ if (isset($_COOKIE['user_id'])) {
   // The user_id cookie has not been set
   ?> <script>console.log("User ID cookie is not set.");</script> <?php
   //echo "User ID cookie is not set.";
-  require __DIR__ . '/pages/login.php';
+  header('Location: /login.html');
+  //require __DIR__ . '/pages/login.php';
 }
