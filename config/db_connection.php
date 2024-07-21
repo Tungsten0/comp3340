@@ -1,6 +1,6 @@
 <!-- db_connection.php -->
 <?php
-$servername = "";
+$servername = "auth-db1539.hstgr.io";
 $username = "u144000044_admin";
 $password = "dZ4XmOZ2a";
 $dbname = "u144000044_db";
