@@ -10,7 +10,7 @@ if (isset($_COOKIE['user_id'])) {
   //echo "User ID: " . htmlspecialchars($user_id);
   switch ($request) {
     case '/login' :
-      require __DIR__ . '/pages/login.php';
+      require __DIR__ . '/pages/login.html';
       break;
     default:
       http_response_code(404);
