@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $conn->close();
         header('Location: /login.html#uname_error');
     }
-    $check_username->close();
-    $conn->close();
-    header('Location: /login.html#error');
+    // $check_username->close();
+    // $conn->close();
+    // header('Location: /login.html#error');
 }
