@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if(password_verify($password, $row['password'])) {
             if ($result->num_rows > 0) {
                 //set cookies user id and role
-                if(setcookie('uid', $row['id'], time() + (1800), "/") && setcookie('role', $row['role'], time() + (1800), "/")) {
+                if(setcookie('uid', $row['user_id'], time() + (1800), "/") && setcookie('role', $row['role'], time() + (1800), "/")) {
                     $check_username->close();
                     $conn->close();
                     header('Location: /');
