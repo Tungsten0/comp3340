@@ -1,6 +1,6 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
 
 $request = $_SERVER['REQUEST_URI'];
 
@@ -10,9 +10,6 @@ if (isset($_COOKIE['uid'])) {
   // The uid cookie has been set
   $uid = $_COOKIE['uid'];
   $role = $_COOKIE['role'];
-  echo "User ID: " . htmlspecialchars($uid);
-  echo "Role: " . htmlspecialchars($role);
-  echo "request: " . htmlspecialchars($request);
   switch ($request) {
     case '/':
       echo "in /";
@@ -28,13 +25,8 @@ if (isset($_COOKIE['uid'])) {
       require __DIR__ . '/pages/404.php';
       break;
   }
-  echo "end of switch";
 } else {
-  echo "in else";
   // The uid cookie has not been set
   ?> <script>console.log("User ID cookie is not set.");</script> <?php
-  echo "User ID cookie is not set.";
-  $uid = $_COOKIE['uid'];
-  echo "User ID: " . htmlspecialchars($uid);
   header('Location: /login.html#login_not_set');
 }
