@@ -20,16 +20,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     //if username exists
     if ($check_username->num_rows > 0) {
+        //retrieve user data
+        $sql = "SELECT * FROM users WHERE username='$username'";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+
         //unhash password and verify
         if(password_verify($password, $row['password'])) {
-            echo "Password is correct.";
-
-            //retrieve user data
-            $sql = "SELECT * FROM users WHERE username='$username'";
-            $result = $conn->query($sql);
-
             if ($result->num_rows > 0) {
-                $row = $result->fetch_assoc();
                 //set cookies user id and role
                 setcookie('uid', $row['id'], time() + (1800), "/"); // 1800 seconds = 30 minutes
                 setcookie('role', $row['role'], time() + (1800), "/"); // 1800 seconds = 30 minutes
