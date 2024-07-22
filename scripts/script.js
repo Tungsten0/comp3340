@@ -68,27 +68,6 @@ homeLink.onclick = function (event) {
     wrapper.classList.remove('active-popup');
 }
 
-//temp removed for login validation checking
-// document.addEventListener('DOMContentLoaded', function () {
-//     const form = document.querySelector('form');
-
-//     form.addEventListener('submit', function (event) {
-//         event.preventDefault();
-
-//         const username = document.getElementById('username').value;
-//         const password = document.getElementById('password').value;
-
-//         // Basic authentication logic (replace with server-side validation in real application)
-//         if (username === 'admin' && password === 'adminpassword') {
-//             window.location.href = 'admin_dashboard.html'; // Redirect admin to admin dashboard
-//         } else if (username === 'user' && password === 'userpassword') {
-//             window.location.href = 'dashboard.html'; // Redirect standard user to standard dashboard
-//         } else {
-//             alert('Invalid username or password');
-//         }
-//     });
-// });
-
 var forgotPasswordModal = document.getElementById("forgotPasswordModal");
 
 // Get the button that opens the modal
