@@ -20,7 +20,9 @@ if (isset($_COOKIE['uid'])) {
 } else {
   // The uid cookie has not been set
   ?> <script>console.log("User ID cookie is not set.");</script> <?php
-  //echo "User ID cookie is not set.";
-  header('Location: /login.html#login_not_set');
+  echo "User ID cookie is not set.";
+  $uid = $_COOKIE['uid'];
+  echo "User ID: " . htmlspecialchars($uid);
+  //header('Location: /login.html#login_not_set');
   //require __DIR__ . '/pages/login.php';
 }
