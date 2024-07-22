@@ -6,104 +6,104 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="style.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="css/style.css"> <!-- Link to your CSS file -->
 </head>
 
 <body>
-<header>
-    <h1>Welcome Admin</h1>
-    <nav class="navigation">
-        <div class="dropdown">
-            <a href="#">User Functions</a>
-            <div class="dropdown-content">
-                <a href="OrderMaterialsPage.html">Order Material</a>
-                <a href="user_dashboard.html">View Order Queue</a>
+    <header>
+        <h1>Welcome Admin</h1>
+        <nav class="navigation">
+            <div class="dropdown">
+                <a href="#">User Functions</a>
+                <div class="dropdown-content">
+                    <a href="OrderMaterialsPage.html">Order Material</a>
+                    <a href="user_dashboard.html">View Order Queue</a>
+                </div>
             </div>
-        </div>
-        <div class="dropdown">
-            <a href="#">Inventory</a>
-            <div class="dropdown-content">
-                <a href="Manual_Add_Materials.html">Manually Add</a>
-                <a href="Receive_PO.html">Add by PO</a>
-                <a href="Check_Inventory.html">Search Inventory</a>
+            <div class="dropdown">
+                <a href="#">Inventory</a>
+                <div class="dropdown-content">
+                    <a href="Manual_Add_Materials.html">Manually Add</a>
+                    <a href="Receive_PO.html">Add by PO</a>
+                    <a href="Check_Inventory.html">Search Inventory</a>
+                </div>
             </div>
-        </div>
-        <div class="dropdown">
-            <a href="#">Manage</a>
-            <div class="dropdown-content">
-                <a href="Add_User.html">Users</a>
-                <a href="inventory.html">Products</a>
-                <a href="warehouse.html">Warehouse</a>
+            <div class="dropdown">
+                <a href="#">Manage</a>
+                <div class="dropdown-content">
+                    <a href="Add_User.html">Users</a>
+                    <a href="inventory.html">Products</a>
+                    <a href="warehouse.html">Warehouse</a>
+                </div>
             </div>
-        </div>
-        <div class="dropdown">
-            <a href="#">Purchasing Orders</a>
-            <div class="dropdown-content">
-                <a href="Create_PO.html">Create</a>
-                <a href="View_PO.html">View</a>
+            <div class="dropdown">
+                <a href="#">Purchasing Orders</a>
+                <div class="dropdown-content">
+                    <a href="Create_PO.html">Create</a>
+                    <a href="View_PO.html">View</a>
+                </div>
             </div>
-        </div>
-    </nav>
-    <button id="logoutBtn" class="return-button">Logout</button>
-</header>
+        </nav>
+        <button id="logoutBtn" class="return-button">Logout</button>
+    </header>
 
-<div class="wrapper">
-    <span class="icon-close">
-        <ion-icon name="close-outline"></ion-icon>
-    </span>
-    <div class="form-box login">
-        <h2>Login</h2>
-        <form action="#">
-            <div class="input-box">
-                <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
-                <input type="email" required>
-                <label>Email</label>
-            </div>
-            <div class="input-box">
-                <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-                <input type="password" required>
-                <label>Password</label>
-            </div>
-            <button type="submit" class="btn">Login</button>
-        </form>
+    <div class="wrapper">
+        <span class="icon-close">
+            <ion-icon name="close-outline"></ion-icon>
+        </span>
+        <div class="form-box login">
+            <h2>Login</h2>
+            <form action="#">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+                    <input type="email" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+                    <input type="password" required>
+                    <label>Password</label>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+        </div>
+
+        <div class="form-box register">
+            <h2>Registration</h2>
+            <form action="#">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+                    <input type="text" required>
+                    <label>Username</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+                    <input type="email" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+                    <input type="password" required>
+                    <label>Password</label>
+                </div>
+                <button type="submit" class="btn">Register</button>
+            </form>
+        </div>
     </div>
 
-    <div class="form-box register">
-        <h2>Registration</h2>
-        <form action="#">
-            <div class="input-box">
-                <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
-                <input type="text" required>
-                <label>Username</label>
-            </div>
-            <div class="input-box">
-                <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
-                <input type="email" required>
-                <label>Email</label>
-            </div>
-            <div class="input-box">
-                <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-                <input type="password" required>
-                <label>Password</label>
-            </div>
-            <button type="submit" class="btn">Register</button>
-        </form>
-    </div>
-</div>
+    <footer>
+        <p>&copy; 2024 Your Company</p>
+    </footer>
 
-<footer>
-    <p>&copy; 2024 Your Company</p>
-</footer>
-
-<script src="script.js"></script> <!-- Link to your JavaScript file -->
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-<script>
-    // Add JavaScript for logout functionality
-    document.getElementById('logoutBtn').addEventListener('click', function() {
-        window.location.href = 'index.html';
-    });
-</script>
+    <script src="script.js"></script> <!-- Link to your JavaScript file -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+        // Add JavaScript for logout functionality
+        document.getElementById('logoutBtn').addEventListener('click', function () {
+            window.location.href = 'index.html';
+        });
+    </script>
 </body>
 
 </html>

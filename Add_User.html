@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +33,8 @@
 
         .button-container {
             text-align: center;
-            margin-top: 20px; /* Adjusted margin */
+            margin-top: 20px;
+            /* Adjusted margin */
             margin-bottom: 20px;
         }
 
@@ -57,9 +59,11 @@
         .form-container {
             display: none;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+            background: rgba(255, 255, 255, 0.9);
+            /* Slightly transparent background */
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /* Optional: Add shadow for better visibility */
             position: relative;
             margin-top: 20px;
         }
@@ -128,11 +132,14 @@
             margin-top: 20px;
         }
 
-        table, th, td {
+        table,
+        th,
+        td {
             border: 1px solid #ddd;
         }
 
-        th, td {
+        th,
+        td {
             padding: 10px;
             text-align: left;
         }
@@ -172,203 +179,216 @@
         }
     </style>
 </head>
+
 <body>
-<header>
-    <h1>Pending Users</h1>
-</header>
-<div class="container">
-    <div class="button-container">
-        <button class="main-button" onclick="showForm('add')">Add User</button>
-        <button class="main-button" onclick="showForm('approve')">Approve User</button>
-        <button class="main-button" onclick="showForm('edit')">Edit User</button>
-        <button class="main-button" onclick="showForm('remove')">Remove User</button>
-        <button class="main-button" onclick="showUsers()">Display All Users</button>
-    </div>
-
-    <!-- Add User Form -->
-    <div id="add-user-form" class="form-container">
-        <button class="close-btn" onclick="closeForm()">x</button>
-        <legend><h2>Add User:</h2></legend>
-        <label for="add-username">Username:</label>
-        <input type="text" id="add-username" required>
-        <label for="add-email">Email:</label>
-        <input type="email" id="add-email" required>
-        <label for="add-password">Password:</label>
-        <input type="password" id="add-password" required>
-        <button type="submit" onclick="addUser()">Add User</button>
-    </div>
-
-    <!-- Approve User Form -->
-    <div id="approve-user-form" class="form-container">
-        <button class="close-btn" onclick="closeForm()">x</button>
-        <legend><h2>Approve User:</h2></legend>
-        <table>
-            <thead>
-            <tr>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Registration Date</th>
-                <th>Permissions</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody id="pendingUserTableBody">
-            <!-- Example User Data -->
-            <tr>
-                <td>john_doe</td>
-                <td>john@example.com</td>
-                <td>2024-07-21</td>
-                <td>
-                    <select class="permissions-dropdown">
-                        <option value="user">User</option>
-                        <option value="inventory">Inventory</option>
-                        <option value="admin">Admin</option>
-                    </select>
-                </td>
-                <td>
-                    <button onclick="approveUser('john_doe')">Approve</button>
-                    <button onclick="rejectUser('john_doe')">Reject</button>
-                </td>
-            </tr>
-            <!-- Add more rows as needed -->
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Edit User Form -->
-    <div id="edit-user-form" class="form-container">
-        <button class="close-btn" onclick="closeForm()">x</button>
-        <legend><h2>Edit User:</h2></legend>
-        <label for="edit-username">Username:</label>
-        <input type="text" id="edit-username" required>
-        <button type="button" onclick="fetchUserDetails()">Fetch Details</button>
-        <div id="edit-details" style="display: none;">
-            <label for="edit-email">Email:</label>
-            <input type="email" id="edit-email">
-            <label for="edit-permissions">Permissions:</label>
-            <select id="edit-permissions">
-                <option value="user">User</option>
-                <option value="inventory">Inventory</option>
-                <option value="admin">Admin</option>
-            </select>
-            <button type="submit" onclick="editUser()">Edit User</button>
+    <header>
+        <h1>Pending Users</h1>
+    </header>
+    <div class="container">
+        <div class="button-container">
+            <button class="main-button" onclick="showForm('add')">Add User</button>
+            <button class="main-button" onclick="showForm('approve')">Approve User</button>
+            <button class="main-button" onclick="showForm('edit')">Edit User</button>
+            <button class="main-button" onclick="showForm('remove')">Remove User</button>
+            <button class="main-button" onclick="showUsers()">Display All Users</button>
         </div>
-        <div id="edit-loading" style="display: none;">Loading...</div>
-    </div>
 
-    <!-- Remove User Form -->
-    <div id="remove-user-form" class="form-container">
-        <button class="close-btn" onclick="closeForm()">x</button>
-        <legend><h2>Remove User:</h2></legend>
-        <label for="remove-username">Username:</label>
-        <input type="text" id="remove-username" required>
-        <button type="button" onclick="fetchUserToRemove()">Fetch User</button>
-        <div id="remove-details" style="display: none;">
-            <p id="remove-user-info"></p>
-            <button type="submit" id="removeUserButton" onclick="removeUser()">Remove User</button>
+        <!-- Add User Form -->
+        <div id="add-user-form" class="form-container">
+            <button class="close-btn" onclick="closeForm()">x</button>
+            <legend>
+                <h2>Add User:</h2>
+            </legend>
+            <label for="add-username">Username:</label>
+            <input type="text" id="add-username" required>
+            <label for="add-email">Email:</label>
+            <input type="email" id="add-email" required>
+            <label for="add-password">Password:</label>
+            <input type="password" id="add-password" required>
+            <button type="submit" onclick="addUser()">Add User</button>
         </div>
-        <div id="remove-loading" style="display: none;">Loading...</div>
+
+        <!-- Approve User Form -->
+        <div id="approve-user-form" class="form-container">
+            <button class="close-btn" onclick="closeForm()">x</button>
+            <legend>
+                <h2>Approve User:</h2>
+            </legend>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Registration Date</th>
+                        <th>Permissions</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="pendingUserTableBody">
+                    <!-- Example User Data -->
+                    <tr>
+                        <td>john_doe</td>
+                        <td>john@example.com</td>
+                        <td>2024-07-21</td>
+                        <td>
+                            <select class="permissions-dropdown">
+                                <option value="user">User</option>
+                                <option value="inventory">Inventory</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button onclick="approveUser('john_doe')">Approve</button>
+                            <button onclick="rejectUser('john_doe')">Reject</button>
+                        </td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Edit User Form -->
+        <div id="edit-user-form" class="form-container">
+            <button class="close-btn" onclick="closeForm()">x</button>
+            <legend>
+                <h2>Edit User:</h2>
+            </legend>
+            <label for="edit-username">Username:</label>
+            <input type="text" id="edit-username" required>
+            <button type="button" onclick="fetchUserDetails()">Fetch Details</button>
+            <div id="edit-details" style="display: none;">
+                <label for="edit-email">Email:</label>
+                <input type="email" id="edit-email">
+                <label for="edit-permissions">Permissions:</label>
+                <select id="edit-permissions">
+                    <option value="user">User</option>
+                    <option value="inventory">Inventory</option>
+                    <option value="admin">Admin</option>
+                </select>
+                <button type="submit" onclick="editUser()">Edit User</button>
+            </div>
+            <div id="edit-loading" style="display: none;">Loading...</div>
+        </div>
+
+        <!-- Remove User Form -->
+        <div id="remove-user-form" class="form-container">
+            <button class="close-btn" onclick="closeForm()">x</button>
+            <legend>
+                <h2>Remove User:</h2>
+            </legend>
+            <label for="remove-username">Username:</label>
+            <input type="text" id="remove-username" required>
+            <button type="button" onclick="fetchUserToRemove()">Fetch User</button>
+            <div id="remove-details" style="display: none;">
+                <p id="remove-user-info"></p>
+                <button type="submit" id="removeUserButton" onclick="removeUser()">Remove User</button>
+            </div>
+            <div id="remove-loading" style="display: none;">Loading...</div>
+        </div>
+
+        <!-- Display All Users Form -->
+        <div id="display-users" class="form-container">
+            <button class="close-btn" onclick="closeForm()">x</button>
+            <legend>
+                <h2>All Users:</h2>
+            </legend>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Permissions</th>
+                    </tr>
+                </thead>
+                <tbody id="allUsersTableBody">
+                    <!-- Example User Data -->
+                    <tr>
+                        <td>admin_user</td>
+                        <td>admin@example.com</td>
+                        <td>Admin</td>
+                    </tr>
+                    <tr>
+                        <td>inventory_user</td>
+                        <td>inventory@example.com</td>
+                        <td>Inventory</td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </div>
     </div>
+    <footer>
+        <button class="return-button" onclick="window.location.href='admin_dashboard.html'">Return to Admin
+            Dashboard</button>
+    </footer>
 
-    <!-- Display All Users Form -->
-    <div id="display-users" class="form-container">
-        <button class="close-btn" onclick="closeForm()">x</button>
-        <legend><h2>All Users:</h2></legend>
-        <table>
-            <thead>
-            <tr>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Permissions</th>
-            </tr>
-            </thead>
-            <tbody id="allUsersTableBody">
-            <!-- Example User Data -->
-            <tr>
-                <td>admin_user</td>
-                <td>admin@example.com</td>
-                <td>Admin</td>
-            </tr>
-            <tr>
-                <td>inventory_user</td>
-                <td>inventory@example.com</td>
-                <td>Inventory</td>
-            </tr>
-            <!-- Add more rows as needed -->
-            </tbody>
-        </table>
-    </div>
-</div>
-<footer>
-    <button class="return-button" onclick="window.location.href='admin_dashboard.html'">Return to Admin Dashboard</button>
-</footer>
+    <script>
+        function showForm(formType) {
+            // Hide all forms
+            document.querySelectorAll('.form-container').forEach(form => form.classList.remove('active'));
 
-<script>
-    function showForm(formType) {
-        // Hide all forms
-        document.querySelectorAll('.form-container').forEach(form => form.classList.remove('active'));
+            // Show the selected form
+            document.getElementById(`${formType}-user-form`).classList.add('active');
+        }
 
-        // Show the selected form
-        document.getElementById(`${formType}-user-form`).classList.add('active');
-    }
+        function closeForm() {
+            // Hide all forms
+            document.querySelectorAll('.form-container').forEach(form => form.classList.remove('active'));
+        }
 
-    function closeForm() {
-        // Hide all forms
-        document.querySelectorAll('.form-container').forEach(form => form.classList.remove('active'));
-    }
+        function addUser() {
+            const username = document.getElementById('add-username').value;
+            const email = document.getElementById('add-email').value;
+            const password = document.getElementById('add-password').value;
+            // Add user logic here
+            console.log(`Adding user: ${username}, ${email}`);
+        }
 
-    function addUser() {
-        const username = document.getElementById('add-username').value;
-        const email = document.getElementById('add-email').value;
-        const password = document.getElementById('add-password').value;
-        // Add user logic here
-        console.log(`Adding user: ${username}, ${email}`);
-    }
+        function approveUser(username) {
+            // Approve user logic here
+            console.log(`Approving user: ${username}`);
+        }
 
-    function approveUser(username) {
-        // Approve user logic here
-        console.log(`Approving user: ${username}`);
-    }
+        function rejectUser(username) {
+            // Reject user logic here
+            console.log(`Rejecting user: ${username}`);
+        }
 
-    function rejectUser(username) {
-        // Reject user logic here
-        console.log(`Rejecting user: ${username}`);
-    }
+        function fetchUserDetails() {
+            const username = document.getElementById('edit-username').value;
+            // Fetch user details logic here
+            console.log(`Fetching details for user: ${username}`);
+            document.getElementById('edit-details').style.display = 'block'; // Show edit details form
+            document.getElementById('edit-loading').style.display = 'none'; // Hide loading indicator
+        }
 
-    function fetchUserDetails() {
-        const username = document.getElementById('edit-username').value;
-        // Fetch user details logic here
-        console.log(`Fetching details for user: ${username}`);
-        document.getElementById('edit-details').style.display = 'block'; // Show edit details form
-        document.getElementById('edit-loading').style.display = 'none'; // Hide loading indicator
-    }
+        function editUser() {
+            const username = document.getElementById('edit-username').value;
+            const email = document.getElementById('edit-email').value;
+            const permissions = document.getElementById('edit-permissions').value;
+            // Edit user logic here
+            console.log(`Editing user: ${username}, ${email}, ${permissions}`);
+        }
 
-    function editUser() {
-        const username = document.getElementById('edit-username').value;
-        const email = document.getElementById('edit-email').value;
-        const permissions = document.getElementById('edit-permissions').value;
-        // Edit user logic here
-        console.log(`Editing user: ${username}, ${email}, ${permissions}`);
-    }
+        function fetchUserToRemove() {
+            const username = document.getElementById('remove-username').value;
+            // Fetch user details logic here
+            console.log(`Fetching user to remove: ${username}`);
+            document.getElementById('remove-details').style.display = 'block'; // Show remove details form
+            document.getElementById('remove-loading').style.display = 'none'; // Hide loading indicator
+        }
 
-    function fetchUserToRemove() {
-        const username = document.getElementById('remove-username').value;
-        // Fetch user details logic here
-        console.log(`Fetching user to remove: ${username}`);
-        document.getElementById('remove-details').style.display = 'block'; // Show remove details form
-        document.getElementById('remove-loading').style.display = 'none'; // Hide loading indicator
-    }
+        function removeUser() {
+            const username = document.getElementById('remove-username').value;
+            // Remove user logic here
+            console.log(`Removing user: ${username}`);
+        }
 
-    function removeUser() {
-        const username = document.getElementById('remove-username').value;
-        // Remove user logic here
-        console.log(`Removing user: ${username}`);
-    }
-
-    function showUsers() {
-        // Display all users logic here
-        document.getElementById('display-users').classList.add('active');
-    }
-</script>
+        function showUsers() {
+            // Display all users logic here
+            document.getElementById('display-users').classList.add('active');
+        }
+    </script>
 </body>
+
 </html>

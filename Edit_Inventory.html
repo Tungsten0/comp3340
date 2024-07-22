@@ -4,9 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Inventory</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <title>Edit Inventory</title>
+    <link rel="stylesheet" href="style.css">
     <style>
         body {
             display: flex;
@@ -126,20 +125,61 @@
         .return-button:hover {
             background-color: #45a049;
         }
+
+        #popup-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 80%;
+            text-align: center;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        #popup-modal.show {
+            display: flex;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>Product Inventory</h1>
-        <form onsubmit="handleInventorySubmit(event)">
+        <h1>Edit Inventory</h1>
+        <form onsubmit="handleEdit(event)">
             <div class="form-group">
-                <label for="product-number">Product Number:</label>
-                <input type="text" id="product-number" name="product-number" placeholder="Enter product number"
-                    required>
+                <label for="barcode">Barcode:</label>
+                <input type="text" id="barcode" name="barcode" placeholder="Enter barcode" required>
             </div>
             <div class="button-group">
                 <button type="submit">Check Inventory</button>
+                <button type="button" onlick="window.location.href='material_handler_dashboard.html'">Return to Main
+                    Menu</button>
             </div>
         </form>
         <div id="inventory-result" class="hidden">
@@ -153,6 +193,7 @@
                         <th>Storage Level</th>
                         <th>Quantity</th>
                         <th>Barcode</th> <!-- Added Barcode Column -->
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody id="inventory-table-body">
@@ -162,36 +203,48 @@
         </div>
     </div>
 
-    <!-- Return Button at the Bottom -->
-    <div class="return-button-container">
-        <a href="material_handler_dashboard.html" class="return-button">Return to Main Menu</a>
+    <!-- Popup modal for editing location/quantity -->
+    <div id="popup-modal" class="hidden">
+        <div class="modal-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h3>Edit Location and Quantity</h3>
+            <div class="form-group">
+                <label for="new-location">New Location:</label>
+                <input type="text" id="new-location" placeholder="Enter new location" required>
+            </div>
+            <div class="form-group">
+                <label for="new-quantity">New Quantity:</label>
+                <input type="number" id="new-quantity" placeholder="Enter new quantity" required>
+            </div>
+            <button onclick="saveChanges()">Save Changes</button>
+        </div>
     </div>
 
     <script>
-        function handleInventorySubmit(event) {
+        function handleEdit(event) {
             event.preventDefault(); // Prevent default form submission
 
             // Get the form elements
-            const productNumberInput = document.getElementById('product-number');
+            const barcodeInput = document.getElementById('barcode');
 
             // Retrieve the product number and convert to upper case
-            const productNumber = productNumberInput.value.trim().toUpperCase();
+            const barcode = barcodeInput.value.trim().toUpperCase();
 
-            // Check if product number is filled
-            if (!productNumber) {
-                alert('Please enter a product number.');
+            // Check if barcode is filled
+            if (!barcode) {
+                alert('Please enter a barcode.');
                 return;
             }
 
             // Simulate fetching inventory data (replace this with actual data fetching)
             const inventoryData = {
-                "P001": [
+                "123456789012": [
                     { "zone": "Z01", "number": "001", "level": "A", "quantity": 10, "barcode": "123456789012" },
-                    { "zone": "Z02", "number": "003", "level": "B", "quantity": 5, "barcode": "987654321098" }
+                    { "zone": "Z02", "number": "003", "level": "B", "quantity": 5, "barcode": "123456789012" }
                 ],
-                "P002": [
-                    { "zone": "Z01", "number": "002", "level": "C", "quantity": 20, "barcode": "564738291056" },
-                    { "zone": "Z03", "number": "004", "level": "D", "quantity": 15, "barcode": "192837465091" }
+                "987654321098": [
+                    { "zone": "Z01", "number": "002", "level": "C", "quantity": 20, "barcode": "987654321098" },
+                    { "zone": "Z03", "number": "004", "level": "D", "quantity": 15, "barcode": "987654321098" }
                 ]
                 // Add more example data as needed
             };
@@ -202,7 +255,7 @@
                 return acc;
             }, {});
 
-            const productData = inventoryDataUpper[productNumber] || [];
+            const productData = inventoryDataUpper[barcode] || [];
 
             if (productData.length > 0) {
                 let totalQuantity = 0;
@@ -213,12 +266,13 @@
                     totalQuantity += item.quantity;
                     const row = document.createElement('tr');
                     row.innerHTML = `
-                        <td>${item.zone}</td>
-                        <td>${item.number}</td>
-                        <td>${item.level}</td>
-                        <td>${item.quantity}</td>
-                        <td>${item.barcode}</td> <!-- Added Barcode Data -->
-                    `;
+                            <td>${item.zone}</td>
+                            <td>${item.number}</td>
+                            <td>${item.level}</td>
+                            <td>${item.quantity}</td>
+                            <td>${item.barcode}</td> 
+                            <td><button onclick="openPopup()">Edit location/quantity</button></td>
+                        `;
                     tableBody.appendChild(row);
                 });
 
@@ -228,6 +282,37 @@
                 alert('No inventory data found for the given product number.');
                 document.getElementById('inventory-result').classList.add('hidden');
             }
+        }
+
+        // Function to open the popup modal
+        function openPopup() {
+            const modal = document.getElementById('popup-modal');
+            modal.classList.add('show');
+        }
+
+        // Function to close the popup modal
+        function closePopup() {
+            const modal = document.getElementById('popup-modal');
+            modal.classList.remove('show');
+        }
+
+        // Function to handle saving changes
+        function saveChanges() {
+            // Get new location and quantity inputs
+            const newLocation = document.getElementById('new-location').value.trim();
+            const newQuantity = parseInt(document.getElementById('new-quantity').value.trim(), 10);
+
+            // Validate inputs (you can add more validation as needed)
+            if (!newLocation || !newQuantity || newQuantity <= 0) {
+                alert('Please enter valid values for new location and quantity.');
+                return;
+            }
+
+            // Perform your save changes logic here (replace alert with actual functionality)
+            alert(`New Location: ${newLocation}, New Quantity: ${newQuantity}`);
+
+            // Close the popup after saving changes
+            closePopup();
         }
     </script>
 </body>

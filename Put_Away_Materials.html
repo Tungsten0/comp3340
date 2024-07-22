@@ -82,11 +82,14 @@
             margin-bottom: 20px;
         }
 
-        table, th, td {
+        table,
+        th,
+        td {
             border: 1px solid #ddd;
         }
 
-        th, td {
+        th,
+        td {
             padding: 10px;
             text-align: left;
         }
@@ -182,42 +185,43 @@
 </head>
 
 <body>
-<div class="container">
-    <h1>Put Away Product</h1>
-    <form onsubmit="handlePutAway(event)">
-        <div class="form-group">
-            <label for="barcode">Barcode:</label>
-            <input type="text" id="barcode" name="barcode" placeholder="Enter barcode" required>
-        </div>
-        <div class="button-group">
-            <button type="submit">Look Up Product</button>
-            <button type="button" onclick="window.location.href='material_handler_dashboard.html'">Return to Main Menu</button>
-        </div>
-    </form>
-    <div id="result-section" class="hidden">
-        <h2>Product Details</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>Product Number</th>
-                <th>Quantity</th>
-                <th>Current Location</th>
-            </tr>
-            </thead>
-            <tbody id="result-table-body">
-            <!-- Data will be populated here -->
-            </tbody>
-        </table>
-        <div class="form-group">
-            <label for="new-location">New Location:</label>
-            <input type="text" id="new-location" name="new-location" placeholder="Enter new location" required>
-        </div>
-        <div class="button-group">
-            <button type="button" onclick="confirmLocation()">Confirm Location</button>
-            <button type="button" onclick="window.location.href='admin_dashboard.html'">Return to Main Menu</button>
+    <div class="container">
+        <h1>Put Away Product</h1>
+        <form onsubmit="handlePutAway(event)">
+            <div class="form-group">
+                <label for="barcode">Barcode:</label>
+                <input type="text" id="barcode" name="barcode" placeholder="Enter barcode" required>
+            </div>
+            <div class="button-group">
+                <button type="submit">Look Up Product</button>
+                <button type="button" onclick="window.location.href='material_handler_dashboard.html'">Return to Main
+                    Menu</button>
+            </div>
+        </form>
+        <div id="result-section" class="hidden">
+            <h2>Product Details</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product Number</th>
+                        <th>Quantity</th>
+                        <th>Current Location</th>
+                    </tr>
+                </thead>
+                <tbody id="result-table-body">
+                    <!-- Data will be populated here -->
+                </tbody>
+            </table>
+            <div class="form-group">
+                <label for="new-location">New Location:</label>
+                <input type="text" id="new-location" name="new-location" placeholder="Enter new location" required>
+            </div>
+            <div class="button-group">
+                <button type="button" onclick="confirmLocation()">Confirm Location</button>
+                <button type="button" onclick="window.location.href='admin_dashboard.html'">Return to Main Menu</button>
+            </div>
         </div>
     </div>
-</div>
 </body>
 
 </html>
