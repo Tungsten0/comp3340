@@ -40,13 +40,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 echo "Invalid username or password.";
                 $check_username->close();
                 $conn->close();
-                header('Location: /pages/login.html#error');
+                header('Location: /pages/login.html#error1');
             }
         } else {
             echo "Password is incorrect.";
+            $check_username->close();
+            $conn->close();
+            header('Location: /pages/login.html#pass_error');
         }
     } else {
         echo "Username doesnt exist.";
+        $check_username->close();
+        $conn->close();
+        header('Location: /pages/login.html#uname_error');
     }
     $check_username->close();
     $conn->close();
