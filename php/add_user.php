@@ -1,12 +1,14 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+//temporarily display errors
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     include '../config/db_connection.php';
 
+    //get form data
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $username = $_POST['username'];
@@ -14,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
     $permission = $_POST['permissions'];
 
+    //prevent sql injection
     $fname = mysqli_real_escape_string($conn, $fname);
     $lname = mysqli_real_escape_string($conn, $lname);
     $username = mysqli_real_escape_string($conn, $username);
@@ -25,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $check_username->execute();
     $check_username->store_result();
 
+    //check if username already exists
     if ($check_username->num_rows > 0) {
         echo "Username already exists.";
     } else {

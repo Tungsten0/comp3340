@@ -1,3 +1,20 @@
+<?php
+include '../config/db_connection.php';
+
+#get all users
+$sql = "SELECT * FROM users";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $users = $result->fetch_all(MYSQLI_ASSOC);
+} else {
+    $users = [];
+}
+
+$conn->close();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -133,29 +150,27 @@
             <legend>
                 <h2>All Users:</h2>
             </legend>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Permissions</th>
-                    </tr>
-                </thead>
-                <tbody id="allUsersTableBody">
-                    <!-- Example User Data -->
-                    <tr>
-                        <td>admin_user</td>
-                        <td>admin@example.com</td>
-                        <td>Admin</td>
-                    </tr>
-                    <tr>
-                        <td>inventory_user</td>
-                        <td>inventory@example.com</td>
-                        <td>Inventory</td>
-                    </tr>
-                    <!-- Add more rows as needed -->
-                </tbody>
-            </table>
+            <?php #display users
+            if (count($users) > 0) { ?>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                        </tr>
+                    </thead>
+                    <tbody id="allUsersTableBody">
+                        <tr>
+                        <?php foreach ($users as $user) { 
+                                echo "<td>" . $user['username'] . "</td>";
+                                echo "<td>" . $user['email'] . "</td>";
+                                echo "<td>" . $user['role'] . "</td>";
+                             ?> </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+                <?php } ?>
         </div>
     </div>
     <footer>
@@ -197,6 +212,7 @@
             console.log(`Rejecting user: ${username}`);
         }
 
+        /*
         function fetchUserDetails() {
             const username = document.getElementById('edit-username').value;
             // Fetch user details logic here
@@ -204,7 +220,9 @@
             document.getElementById('edit-details').style.display = 'block'; // Show edit details form
             document.getElementById('edit-loading').style.display = 'none'; // Hide loading indicator
         }
+        */
 
+        /*
         function editUser() {
             const username = document.getElementById('edit-username').value;
             const email = document.getElementById('edit-email').value;
@@ -231,6 +249,8 @@
             // Display all users logic here
             document.getElementById('display-users').classList.add('active');
         }
+
+        */
     </script>
 </body>
 
