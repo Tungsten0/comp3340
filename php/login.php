@@ -29,11 +29,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if(password_verify($password, $row['password'])) {
             if ($result->num_rows > 0) {
                 //set cookies user id and role
-                setcookie('uid', $row['id'], time() + (1800), "/"); // 1800 seconds = 30 minutes
-                setcookie('role', $row['role'], time() + (1800), "/"); // 1800 seconds = 30 minutes
-                $check_username->close();
-                $conn->close();
-                header('Location: /');
+                if(setcookie('uid', $row['id'], time() + (1800), "/") && setcookie('role', $row['role'], time() + (1800), "/")) {
+                    $check_username->close();
+                    $conn->close();
+                    header('Location: /');
+                } else {
+                    ?> <script>console.log("Cookies could not be set.");</script> <?php
+                    $check_username->close();
+                    $conn->close();
+                    header('Location: /login.html#cookie_error');
+                }
             } else {
                 ?> <script>console.log("User data not found.");</script> <?php
                 $check_username->close();
