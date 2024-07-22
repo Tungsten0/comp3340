@@ -1,0 +1,23 @@
+<form action="../php/add_user.php" method="POST">
+          <legend>
+              <h2>Add User:</h2>
+          </legend>
+          <label for="add-fname">First Name:</label>
+          <input type="text" name="fname" id="fname" required>
+          <label for="add-lname">Last Name:</label>
+          <input type="text" name="lname" id="lname" required>
+          <label for="add-username">Username:</label>
+          <input type="text" name="username" id="username" required>
+          <label for="add-email">Email:</label>
+          <input type="email" name="email" id="email" required>
+          <label for="add-password">Password:</label>
+          <input type="password" name="password" id="password" required>
+          <label for="add-permissions">Permissions:</label>
+          <select name="permissions" id="permissions">
+              <option value="staff">Staff</option>
+              <option value="inventory">Inventory</option>
+              <option value="admin">Admin</option>
+          </select>
+          <button type="submit">Add User</button>
+  </div>
+</form>
