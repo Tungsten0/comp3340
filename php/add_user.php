@@ -4,6 +4,14 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
+$fname = $_POST['fname'] ?? '';
+$lname = $_POST['lname'] ?? '';
+$username = $_POST['username'] ?? '';
+$email = $_POST['email'] ?? '';
+$password = $_POST['password'] ?? '';
+$permission = $_POST['permissions'] ?? '';
+
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     include '../config/db_connection.php';
 
@@ -28,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     // Prevent SQL injection using prepared statements
     $stmt = $conn->prepare("INSERT INTO users (username, password, email, first_name, last_name, role) VALUES (?, ?, ?, ?, ?, ?)");
-    
+
     if ($stmt) {
         // Hash password
         $password_hashed = password_hash($password, PASSWORD_DEFAULT);
