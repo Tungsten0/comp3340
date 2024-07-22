@@ -7,21 +7,18 @@ error_reporting(E_ALL);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     include '../config/db_connection.php';
 
-    // Retrieve and sanitize POST data
-    $fname = htmlspecialchars($_POST['fname'] ?? '', ENT_QUOTES, 'UTF-8');
-    $lname = htmlspecialchars($_POST['lname'] ?? '', ENT_QUOTES, 'UTF-8');
-    $username = htmlspecialchars($_POST['username'] ?? '', ENT_QUOTES, 'UTF-8');
-    $email = htmlspecialchars($_POST['email'] ?? '', ENT_QUOTES, 'UTF-8');
-    $password = htmlspecialchars($_POST['password'] ?? '', ENT_QUOTES, 'UTF-8');
-    $permission = htmlspecialchars($_POST['permissions'] ?? '', ENT_QUOTES, 'UTF-8');
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $permission = $_POST['permissions'];
 
-    // Debugging: Output the values to verify they are correct
-    echo "First Name: $fname<br>";
-    echo "Last Name: $lname<br>";
-    echo "Username: $username<br>";
-    echo "Email: $email<br>";
-    echo "Password: $password<br>";
-    echo "Permissions: $permission<br>";
+    $fname = mysqli_real_escape_string($conn, $fname);
+    $lname = mysqli_real_escape_string($conn, $lname);
+    $username = mysqli_real_escape_string($conn, $username);
+    $email = mysqli_real_escape_string($conn, $email);
+    $password = mysqli_real_escape_string($conn, $password);
 
     $check_username = $conn->prepare("SELECT * FROM users WHERE username = ?");
     $check_username->bind_param("s", $username);
@@ -52,4 +49,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 } else {
     echo "Form not submitted.";
 }
-?>
+
