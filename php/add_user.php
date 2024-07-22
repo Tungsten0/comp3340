@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     //include '../config/db_connection.php';
 
-    $servername = "https://auth-db1539.hstgr.io/index.php?route=/";
+    $servername = "127.0.0.1";
     $username = "u144000044_admin";
     $password = "dZ4XmOZ2a";
     $dbname = "u144000044_db";
