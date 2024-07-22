@@ -1,10 +1,10 @@
 <?
 
 #add user form from admin dashboard
-include '../config/db_connection.php';
-
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    include '../config/db_connection.php';
+
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $username = $_POST['username'];
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     //hash password
     $password = password_hash($password, PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO users (fist_name, last_name, username, email, password, role) VALUES ('$fname', '$lname', '$username', '$email', '$password', '$permission')";
+    $sql = "INSERT INTO users (username, password, email, fist_name, last_name, role) VALUES ('$username', '$password', '$email', '$fname', '$lname', '$permission')";
     $result = $conn->query($sql);
 
     if ($result) {
