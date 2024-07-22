@@ -12,17 +12,22 @@ if (isset($_COOKIE['uid'])) {
   echo "request: " . htmlspecialchars($request);
   switch ($request) {
     case '/':
+      echo "in /";
       require __DIR__ . '/pages/admind_dashboard.html';
       break;
     case '/add_user':
+      echo "in add user";
       require __DIR__ . '/pages/Add_User.php';
       break;
     default:
+      echo "in default";
       http_response_code(404);
       require __DIR__ . '/pages/404.php';
       break;
   }
+  echo "end of switch";
 } else {
+  echo "in else";
   // The uid cookie has not been set
   ?> <script>console.log("User ID cookie is not set.");</script> <?php
   echo "User ID cookie is not set.";
