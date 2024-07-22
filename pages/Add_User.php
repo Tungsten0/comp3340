@@ -212,7 +212,7 @@ $conn->close();
             console.log(`Rejecting user: ${username}`);
         }
 
-        /*
+        
         function fetchUserDetails() {
             const username = document.getElementById('edit-username').value;
             // Fetch user details logic here
@@ -220,9 +220,9 @@ $conn->close();
             document.getElementById('edit-details').style.display = 'block'; // Show edit details form
             document.getElementById('edit-loading').style.display = 'none'; // Hide loading indicator
         }
-        */
+        
 
-        /*
+        
         function editUser() {
             const username = document.getElementById('edit-username').value;
             const email = document.getElementById('edit-email').value;
@@ -250,7 +250,7 @@ $conn->close();
             document.getElementById('display-users').classList.add('active');
         }
 
-        */
+        
     </script>
 </body>
 
