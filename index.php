@@ -9,6 +9,7 @@ if (isset($_COOKIE['uid'])) {
   ?> <script>console.log("User ID: " + <?php echo $uid; ?>);</script> <?php
   echo "User ID: " . htmlspecialchars($uid);
   echo "role cookie: " . $_COOKIE['role'];
+  echo "request: " . $request;
   switch ($request) {
     case '/' :
       require __DIR__ . '/pages/Add_User.php';
