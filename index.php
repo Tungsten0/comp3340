@@ -11,7 +11,10 @@ if (isset($_COOKIE['uid'])) {
   echo "role cookie: " . $_COOKIE['role'];
   echo "request: " . $request;
   switch ($request) {
-    case '/' :
+    case '/':
+      require __DIR__ . '/pages/admind_dashboard.html';
+      break;
+    case '/add_user':
       require __DIR__ . '/pages/Add_User.php';
       break;
     default:
