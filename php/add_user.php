@@ -14,10 +14,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $conn = new mysqli($servername, $username, $password, $dbname);
 
     // Check connection
-    if ($conn->connect_error) {
-        echo "Connection failed: " . $conn->connect_error;
-        die("Connection failed: " . $conn->connect_error);
+    if ($conn) {
+        echo "Connected successfully";
+    } else {
+        echo "Connection failed: " . mysqli_connect_error();
     }
+    $conn->close();
+    
 
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
