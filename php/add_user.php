@@ -12,7 +12,7 @@ $email = $_POST['email'] ?? '';
 $password = $_POST['password'] ?? '';
 $permission = $_POST['permissions'] ?? '';
 
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     include '../config/db_connection.php';
 
     $fname = $_POST['fname'];
@@ -28,11 +28,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $username = stripcslashes($username);
     $email = stripcslashes($email);
     $password = stripcslashes($password);
-    $fname = mysqli_real_escape_string($conn, $fname);
-    $lname = mysqli_real_escape_string($conn, $lname);
-    $username = mysqli_real_escape_string($conn, $username);
-    $email = mysqli_real_escape_string($conn, $email);
-    $password = mysqli_real_escape_string($conn, $password);
+    // $fname = mysqli_real_escape_string($conn, $fname);
+    // $lname = mysqli_real_escape_string($conn, $lname);
+    // $username = mysqli_real_escape_string($conn, $username);
+    // $email = mysqli_real_escape_string($conn, $email);
+    // $password = mysqli_real_escape_string($conn, $password);
 
     // Prevent SQL injection using prepared statements
     $stmt = $conn->prepare("INSERT INTO users (username, password, email, first_name, last_name, role) VALUES (?, ?, ?, ?, ?, ?)");
@@ -61,4 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     // Close connection
     $conn->close();
+} else {
+    echo "Form not submitted.";
 }
