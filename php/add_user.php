@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Check connection
     if ($conn->connect_error) {
         echo "Connection failed: " . $conn->connect_error;
+        die("Connection failed: " . $conn->connect_error);
     }
 
     $fname = $_POST['fname'];
