@@ -26,11 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $email = mysqli_real_escape_string($conn, $email);
     $password = mysqli_real_escape_string($conn, $password);
 
-    //hash password
-    $password = password_hash($password, PASSWORD_DEFAULT);
-
     // Prevent SQL injection using prepared statements
-    $stmt = $conn->prepare("INSERT INTO users (username, password, email, fist_name, last_name, role) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO users (username, password, email, first_name, last_name, role) VALUES (?, ?, ?, ?, ?, ?)");
     
     if ($stmt) {
         // Hash password
