@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $servername = "127.0.0.1";
     $username = "u144000044_admin";
-    $password = "dZ4XmOZ2a";
+    $password = "dZ4XmOZ2a;";
     $dbname = "u144000044_db";
 
     // Create connection
