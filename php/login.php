@@ -44,9 +44,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         } else {
             ?> <script>console.log("Password is incorrect.");</script> <?php
-            $check_username->close();
-            $conn->close();
-            header('Location: /login.html#pass_error');
+            // $check_username->close();
+            // $conn->close();
+            // header('Location: /login.html#pass_error');
+            echo "Password is incorrect.";
+            echo $row['password'];
+            echo $password;
         }
     } else {
         ?> <script>console.log("Username does not exist.");</script> <?php
