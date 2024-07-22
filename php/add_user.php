@@ -1,7 +1,6 @@
 <?
 
 #add user form from admin dashboard
-session_start();
 include '../config/db_connection.php';
 
 
@@ -28,14 +27,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     //hash password
     $password = password_hash($password, PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO users (fname, lname, username, email, password, permissions) VALUES ('$fname', '$lname', '$username', '$email', '$password', '$permission')";
+    $sql = "INSERT INTO users (fist_name, last_name, username, email, password, role) VALUES ('$fname', '$lname', '$username', '$email', '$password', '$permission')";
     $result = $conn->query($sql);
 
     if ($result) {
         echo "User added successfully.";
-        header('Location: /pages/Add_User.html');
+        //header('Location: /pages/Add_User.html');
     } else {
         echo "User add failed.";
-        header('Location: /pages/Add_User.html#error');
+        //header('Location: /pages/Add_User.html#error');
     }
 }
