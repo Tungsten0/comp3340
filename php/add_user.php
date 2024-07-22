@@ -5,7 +5,7 @@
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     //include '../config/db_connection.php';
 
-    $servername = "auth-db1539.hstgr.io";
+    $servername = "srv1539.hstgr.io";
     $username = "u144000044_admin";
     $password = "dZ4XmOZ2a";
     $dbname = "u144000044_db";
