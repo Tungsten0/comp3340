@@ -3,7 +3,20 @@
 #add user form from admin dashboard
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    include '../config/db_connection.php';
+    //include '../config/db_connection.php';
+
+    $servername = "auth-db1539.hstgr.io";
+    $username = "u144000044_admin";
+    $password = "dZ4XmOZ2a";
+    $dbname = "u144000044_db";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    // Check connection
+    if ($conn->connect_error) {
+        echo "Connection failed: " . $conn->connect_error;
+    }
 
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
