@@ -5,7 +5,7 @@ const btnPopup = document.querySelector('.btnLogin-popup');
 const iconClose = document.querySelector('.icon-close');
 
 var modal = document.getElementById("contactModal");
-var contactLink = document.querySelector(".navigation a:nth-child(3)");
+var contactLink = document.querySelector(".navigation a:nth-child(4)");
 var span = document.getElementsByClassName("close")[0];
 
 var aboutModal = document.getElementById("aboutModal");
