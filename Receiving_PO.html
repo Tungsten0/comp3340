@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Materials to Warehouse</title>
+    <title>Add Inventory to Warehouse</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
@@ -71,7 +71,7 @@
             background-color: #45a049;
         }
 
-        .result-section {
+        .result-section, .checklist-section {
             margin-top: 20px;
         }
 
@@ -105,7 +105,7 @@
         .return-button-container {
             text-align: center;
             padding: 10px;
-            position: fixed;
+            position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
@@ -129,25 +129,79 @@
         }
     </style>
     <script>
-        async function handleAddMaterials(event) {
+        async function handlePOInput(event) {
             event.preventDefault(); // Prevent default form submission
 
-            // Get the form elements
-            const productNumber = document.getElementById('product-number').value;
-            const quantity = parseInt(document.getElementById('quantity').value, 10);
+            // Get the PO number
+            const poNumber = document.getElementById('po-number').value;
 
-            // Validate inputs
-            if (!productNumber || isNaN(quantity) || quantity <= 0) {
-                alert('Please enter a valid product number and quantity.');
+            // Validate PO number
+            if (!poNumber) {
+                alert('Please enter a PO number.');
                 return;
             }
 
-            // Send data to the backend
+            // Simulate fetching checklist data based on PO number (replace this with actual data fetching)
+            const checklistData = {
+                "20008": [
+                    { productNumber: 'P010', description: 'Product A', orderedQuantity: 50 },
+                    { productNumber: 'P011', description: 'Product B', orderedQuantity: 30 }
+                ]
+                // Add more example data as needed
+            };
+
+            // Fetch the checklist for the provided PO number
+            const products = checklistData[poNumber] || [];
+
+            if (products.length > 0) {
+                const checklistTableBody = document.getElementById('checklist-table-body');
+                checklistTableBody.innerHTML = ''; // Clear previous data
+
+                // Populate the checklist
+                products.forEach((item, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td><input type="checkbox" id="item-${index}" data-product-number="${item.productNumber}" data-description="${item.description}" data-ordered-quantity="${item.orderedQuantity}" data-index="${index}"></td>
+                        <td>${item.productNumber}</td>
+                        <td>${item.description}</td>
+                        <td>${item.orderedQuantity}</td>
+                        <td><input type="number" id="actual-quantity-${index}" placeholder="Actual Quantity" min="0" data-index="${index}"></td>
+                    `;
+                    checklistTableBody.appendChild(row);
+                });
+
+                // Show the checklist section
+                document.getElementById('checklist-section').classList.remove('hidden');
+            } else {
+                alert('No products found for the given PO number.');
+                document.getElementById('checklist-section').classList.add('hidden');
+            }
+        }
+
+        async function postInventory() {
+            const selectedItems = [];
+            document.querySelectorAll('#checklist-table-body input[type="checkbox"]:checked').forEach(checkbox => {
+                const index = checkbox.getAttribute('data-index');
+                const actualQuantityInput = document.getElementById(`actual-quantity-${index}`);
+                selectedItems.push({
+                    productNumber: checkbox.getAttribute('data-product-number'),
+                    description: checkbox.getAttribute('data-description'),
+                    orderedQuantity: parseInt(checkbox.getAttribute('data-ordered-quantity'), 10),
+                    actualQuantity: parseInt(actualQuantityInput.value, 10) || 0
+                });
+            });
+
+            if (selectedItems.length === 0) {
+                alert('Please select items to process.');
+                return;
+            }
+
             try {
-                const response = await fetch('/api/add-materials', {
+                // Simulate posting inventory data (replace this with actual data posting)
+                const response = await fetch('/api/post-inventory', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ productNumber, quantity })
+                    body: JSON.stringify({ items: selectedItems })
                 });
 
                 if (!response.ok) throw new Error('Network response was not ok');
@@ -170,34 +224,54 @@
                 document.getElementById('result-section').classList.remove('hidden');
             } catch (error) {
                 console.error('Error:', error);
-                alert('An error occurred while adding materials.');
+                alert('An error occurred while posting inventory.');
             }
         }
 
         function clearForm() {
-            document.getElementById('product-number').value = '';
-            document.getElementById('quantity').value = '';
+            document.getElementById('po-number').value = '';
+            document.getElementById('checklist-section').classList.add('hidden');
             document.getElementById('result-section').classList.add('hidden');
         }
     </script>
 </head>
 <body>
 <div class="container">
-    <h1>Add Materials to Warehouse</h1>
-    <form onsubmit="handleAddMaterials(event)">
+    <h1>Add Inventory to Warehouse</h1>
+    <form onsubmit="handlePOInput(event)">
         <div class="form-group">
-            <label for="product-number">Product Number:</label>
-            <input type="text" id="product-number" name="product-number" placeholder="Enter product number" required>
-        </div>
-        <div class="form-group">
-            <label for="quantity">Quantity:</label>
-            <input type="number" id="quantity" name="quantity" placeholder="Enter quantity" required>
+            <label for="po-number">PO Number:</label>
+            <input type="text" id="po-number" name="po-number" placeholder="Enter PO number" required>
         </div>
         <div class="button-group">
-            <button type="submit">Add Materials</button>
+            <button type="submit">Generate Checklist</button>
             <button type="button" onclick="clearForm()">Clear</button>
         </div>
     </form>
+
+    <!-- Checklist Section -->
+    <div id="checklist-section" class="hidden">
+        <h2>Confirm Details</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Select</th>
+                <th>Product Number</th>
+                <th>Description</th>
+                <th>Ordered Quantity</th>
+                <th>Actual Quantity</th>
+            </tr>
+            </thead>
+            <tbody id="checklist-table-body">
+            <!-- Checklist data will be populated here -->
+            </tbody>
+        </table>
+        <div class="button-group">
+            <button type="button" onclick="postInventory()">Post</button>
+        </div>
+    </div>
+
+    <!-- Result Section -->
     <div id="result-section" class="hidden">
         <h2>Assigned Barcodes and Storage Locations</h2>
         <table>
@@ -213,9 +287,12 @@
         </table>
     </div>
 </div>
+
 <!-- Return Button at the Bottom -->
 <div class="return-button-container">
     <a href="material_handler_dashboard.html" class="return-button">Return to Main Menu</a>
 </div>
 </body>
 </html>
+
+

@@ -1,29 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Inventory</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="styles.css">
     <style>
         body {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
             font-family: 'Poppins', sans-serif;
-            background: url('media/background.jpg') no-repeat center center fixed;
+            background: url('background.jpg') no-repeat center center fixed;
             background-size: cover;
             margin: 0;
         }
 
         .container {
             padding: 20px;
-            background: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
+            background: rgba(255, 255, 255, 0.8);
             border-radius: 8px;
             max-width: 900px;
             margin: 20px auto;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .hidden {
@@ -126,6 +127,7 @@
         }
     </style>
 </head>
+
 <body>
 <div class="container">
     <h1>Product Inventory</h1>
@@ -148,6 +150,7 @@
                 <th>Storage Number</th>
                 <th>Storage Level</th>
                 <th>Quantity</th>
+                <th>Barcode</th> <!-- Added Barcode Column -->
             </tr>
             </thead>
             <tbody id="inventory-table-body">
@@ -181,12 +184,12 @@
         // Simulate fetching inventory data (replace this with actual data fetching)
         const inventoryData = {
             "P001": [
-                { "zone": "Z01", "number": "001", "level": "A", "quantity": 10 },
-                { "zone": "Z02", "number": "003", "level": "B", "quantity": 5 }
+                { "zone": "Z01", "number": "001", "level": "A", "quantity": 10, "barcode": "123456789012" },
+                { "zone": "Z02", "number": "003", "level": "B", "quantity": 5, "barcode": "987654321098" }
             ],
             "P002": [
-                { "zone": "Z01", "number": "002", "level": "C", "quantity": 20 },
-                { "zone": "Z03", "number": "004", "level": "D", "quantity": 15 }
+                { "zone": "Z01", "number": "002", "level": "C", "quantity": 20, "barcode": "564738291056" },
+                { "zone": "Z03", "number": "004", "level": "D", "quantity": 15, "barcode": "192837465091" }
             ]
             // Add more example data as needed
         };
@@ -208,11 +211,12 @@
                 totalQuantity += item.quantity;
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${item.zone}</td>
-                    <td>${item.number}</td>
-                    <td>${item.level}</td>
-                    <td>${item.quantity}</td>
-                `;
+                        <td>${item.zone}</td>
+                        <td>${item.number}</td>
+                        <td>${item.level}</td>
+                        <td>${item.quantity}</td>
+                        <td>${item.barcode}</td> <!-- Added Barcode Data -->
+                    `;
                 tableBody.appendChild(row);
             });
 
@@ -225,4 +229,5 @@
     }
 </script>
 </body>
+
 </html>

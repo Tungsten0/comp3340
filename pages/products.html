@@ -1,27 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Inventory</title>
-<<<<<<< HEAD
-    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <style>
-        /* Add some basic styling for demonstration purposes */
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
             padding: 0;
+            background: url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
         }
 
         header {
-            margin-bottom: 20px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .container {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
+            border-radius: 8px;
+            max-width: 900px;
+            margin: 20px auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-top: 20px;
         }
 
         th, td {
@@ -32,14 +43,40 @@
 
         th {
             background-color: #f2f2f2;
+            font-weight: 600;
         }
 
         tr:nth-child(even) {
             background-color: #f9f9f9;
         }
+
+        tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .return-button-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .return-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+        }
+
+        .return-button:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
-
 <body>
 <header>
     <h1>Product Inventory</h1>
@@ -60,6 +97,10 @@
         <!-- Product data will be dynamically added here -->
         </tbody>
     </table>
+    <!-- Return Button -->
+    <div class="return-button-container">
+        <a href="material_handler_dashboard.html" class="return-button">Return to Main Menu</a>
+    </div>
 </div>
 
 <script>
@@ -106,67 +147,5 @@
         productTableBody.appendChild(row);
     });
 </script>
-=======
-    <link rel="stylesheet" href="../css/style.css">
-</head>
-
-<body>
-    <header>
-        <h1>Product Inventory</h1>
-    </header>
-    <div class="container">
-        <h2>Product Inventory:</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Product ID</th>
-                    <th>Name</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody id="productTableBody">
-                <tr>
-                    <td>101</td>
-                    <td>doohickey</td>
-                    <td>50</td>
-                    <td>$10.99</td>
-                    <td>High-quality doohickey for various uses</td>
-                </tr>
-                <tr>
-                    <td>102</td>
-                    <td>thingamabob</td>
-                    <td>30</td>
-                    <td>$15.49</td>
-                    <td>Multi-functional thingamabob with many features</td>
-                </tr>
-                <tr>
-                    <td>103</td>
-                    <td>Tool</td>
-                    <td>75</td>
-                    <td>$8.99</td>
-                    <td>Durable tool for home and garden</td>
-                </tr>
-                <tr>
-                    <td>104</td>
-                    <td>Freeze ray</td>
-                    <td>20</td>
-                    <td>$99.99</td>
-                    <td>Advanced device with high performance</td>
-                </tr>
-                <tr>
-                    <td>105</td>
-                    <td>Portal gun</td>
-                    <td>100</td>
-                    <td>$5.49</td>
-                    <td>Essential accessory for daily use</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <script src="../scripts/script.js"></script>
->>>>>>> 11ff47d70b8e69f57f11ceca60c72b5b777d47a5
 </body>
-
 </html>
