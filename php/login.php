@@ -37,19 +37,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $conn->close();
                 header('Location: /');
             } else {
-                echo "Invalid username or password.";
+                ?> <script>console.log("User data not found.");</script> <?php
                 $check_username->close();
                 $conn->close();
                 header('Location: /login.html#error1');
             }
         } else {
-            echo "Password is incorrect.";
+            ?> <script>console.log("Password is incorrect.");</script> <?php
             $check_username->close();
             $conn->close();
             header('Location: /login.html#pass_error');
         }
     } else {
-        echo "Username doesnt exist.";
+        ?> <script>console.log("Username does not exist.");</script> <?php
         $check_username->close();
         $conn->close();
         header('Location: /login.html#uname_error');
