@@ -2,17 +2,17 @@
 #login script
 include '../config/db_connection.php';
 
-if (isset($_POST['login'])) {
-    $email = $_POST['email'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'];
     $password = $_POST['password'];
 
     //prevent sql injection
-    $email = stripcslashes($email);
+    $username = stripcslashes($username);
     $password = stripcslashes($password);
-    $email = mysqli_real_escape_string($conn, $email);
+    $username = mysqli_real_escape_string($conn, $username);
     $password = mysqli_real_escape_string($conn, $password);
 
-    $sql = "SELECT * FROM users WHERE email='$email' AND password='$password'";
+    $sql = "SELECT * FROM users WHERE username='$username' AND password='$password'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -20,7 +20,7 @@ if (isset($_POST['login'])) {
         setcookie('user_id', $row['id'], time() + (86400 * 30), "/");
         header('Location: /');
     } else {
-        echo "Invalid email or password.";
+        echo "Invalid username or password.";
         header('Location: /pages/login.html#error');
     }
 }
