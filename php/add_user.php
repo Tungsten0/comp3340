@@ -5,24 +5,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    //include '../config/db_connection.php';
-
-    $servername = "127.0.0.1";
-    $username = "u144000044_admin";
-    $password = "dZ4XmOZ2a;";
-    $dbname = "u144000044_db";
-
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Check connection
-    if ($conn) {
-        echo "Connected successfully";
-    } else {
-        echo "Connection failed: " . mysqli_connect_error();
-    }
-    $conn->close();
-    
+    include '../config/db_connection.php';
 
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
