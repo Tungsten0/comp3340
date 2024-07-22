@@ -7,9 +7,9 @@ if (isset($_COOKIE['uid'])) {
   // The uid cookie has been set
   $uid = $_COOKIE['uid'];
   $role = $_COOKIE['role'];
-  ?> <script>console.log("User ID: " + <?php echo $uid; ?>);</script> <?php
-  ?> <script>console.log("role cookie: " + <?php echo $role; ?>);</script> <?php
-  ?> <script>console.log("request: " + <?php echo $request; ?>);</script> <?php
+  echo "User ID: " . htmlspecialchars($uid);
+  echo "Role: " . htmlspecialchars($role);
+  echo "request: " . htmlspecialchars($request);
   switch ($request) {
     case '/':
       require __DIR__ . '/pages/admind_dashboard.html';
