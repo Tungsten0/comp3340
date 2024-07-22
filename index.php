@@ -13,8 +13,7 @@ if (isset($_COOKIE['uid'])) {
   switch ($request) {
     case '/':
       echo "in /";
-      require __DIR__ . '/pages/admind_dashboard.html';
-      echo "after require";
+      include __DIR__ . '/pages/admind_dashboard.html';
       break;
     case '/add_user':
       echo "in add user";
