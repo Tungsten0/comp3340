@@ -1,4 +1,4 @@
-<?
+<?php
 
 #add user form from admin dashboard
 
@@ -27,14 +27,31 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     //hash password
     $password = password_hash($password, PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO users (username, password, email, fist_name, last_name, role) VALUES ('$username', '$password', '$email', '$fname', '$lname', '$permission')";
-    $result = $conn->query($sql);
+    // Prevent SQL injection using prepared statements
+    $stmt = $conn->prepare("INSERT INTO users (username, password, email, fist_name, last_name, role) VALUES (?, ?, ?, ?, ?, ?)");
+    
+    if ($stmt) {
+        // Hash password
+        $password_hashed = password_hash($password, PASSWORD_DEFAULT);
 
-    if ($result) {
-        echo "User added successfully.";
-        //header('Location: /pages/Add_User.html');
+        // Bind parameters
+        $stmt->bind_param("ssssss", $username, $password_hashed, $email, $fname, $lname, $permission);
+
+        // Execute statement
+        if ($stmt->execute()) {
+            echo "User added successfully.";
+            // header('Location: /pages/Add_User.html');
+        } else {
+            echo "User add failed: " . $stmt->error;
+            // header('Location: /pages/Add_User.html#error');
+        }
+
+        // Close statement
+        $stmt->close();
     } else {
-        echo "User add failed.";
-        //header('Location: /pages/Add_User.html#error');
+        echo "Preparation failed: " . $conn->error;
     }
+
+    // Close connection
+    $conn->close();
 }
