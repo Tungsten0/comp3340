@@ -243,7 +243,7 @@ if(isset($_GET['username'])) {
             console.log(`Rejecting user: ${username}`);
         }
 
-        */
+        
 
         
         function fetchUserDetails() {
@@ -253,7 +253,7 @@ if(isset($_GET['username'])) {
             document.getElementById('edit-details').style.display = 'block'; // Show edit details form
             document.getElementById('edit-loading').style.display = 'none'; // Hide loading indicator
         }
-        
+        */
 
         
         function editUser() {
@@ -264,6 +264,7 @@ if(isset($_GET['username'])) {
             console.log(`Editing user: ${username}, ${email}, ${permissions}`);
         }
 
+        /*
         function fetchUserToRemove() {
             const username = document.getElementById('remove-username').value;
             // Fetch user details logic here
@@ -282,7 +283,7 @@ if(isset($_GET['username'])) {
             // Display all users logic here
             document.getElementById('display-users').classList.add('active');
         }
-
+        */
         
     </script>
 </body>
