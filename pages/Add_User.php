@@ -76,40 +76,37 @@ $conn->close();
             <legend>
                 <h2>Approve User:</h2>
             </legend>
-            <?php #display pending registration users
-                if (count($pendingUsers) > 0) { ?>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Username</th>
-                                <th>Email</th>
-                                <th>Registration Date</th>
-                                <th>Permissions</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="pendingUserTableBody">
-                            <tr>
-                            <?php foreach ($pendingUsers as $puser) { 
-                                    echo "<td>" . $puser['username'] . "</td>";
-                                    echo "<td>" . $puser['email'] . "</td>";
-                                    echo "<td>" . $puser['registration_date'] . "</td>";
-                                    echo '<td>
-                                            <select class="permissions-dropdown">
-                                                <option value="user">User</option>
-                                                <option value="inventory">Inventory</option>
-                                                <option value="admin">Admin</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <button onclick="approveUser("john_doe")">Approve</button>
-                                            <button onclick="rejectUser("john_doe")">Reject</button>
-                                        </td>';
-                                ?> </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-                    <?php } ?>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Registration Date</th>
+                        <th>Permissions</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="pendingUserTableBody">
+                    <!-- Example User Data -->
+                    <tr>
+                        <td>john_doe</td>
+                        <td>john@example.com</td>
+                        <td>2024-07-21</td>
+                        <td>
+                            <select class="permissions-dropdown">
+                                <option value="user">User</option>
+                                <option value="inventory">Inventory</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button onclick="approveUser('john_doe')">Approve</button>
+                            <button onclick="rejectUser('john_doe')">Reject</button>
+                        </td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
         </div>
 
         <!-- Edit User Form -->
