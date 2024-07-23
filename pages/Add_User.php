@@ -87,7 +87,7 @@ $conn->close();
                     </tr>
                 </thead>
                 <tbody id="pendingUserTableBody">
-                    <!-- Example User Data -->
+                    <!-- display pending users -->
                     <tr>
                         <?php foreach ($pendingUsers as $puser) { 
                                 echo "<td>" . $puser['username'] . "</td>";
@@ -186,7 +186,7 @@ $conn->close();
                         </tr>
                     </tbody>
                 </table>
-                <?php } ?>
+            <?php } ?>
         </div>
     </div>
     <footer>
@@ -216,7 +216,7 @@ $conn->close();
             // Add user logic here
             console.log(`Adding user: ${username}, ${email}`);
         }
-        */
+        
 
         function approveUser(username) {
             // Approve user logic here
@@ -227,6 +227,8 @@ $conn->close();
             // Reject user logic here
             console.log(`Rejecting user: ${username}`);
         }
+
+        */
 
         
         function fetchUserDetails() {
