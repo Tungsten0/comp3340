@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php include '../components/header.php'; ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Inventory</title>
-    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/edit_inventory.css">
 </head>
 
@@ -60,7 +55,7 @@
             <button onclick="saveChanges()">Save Changes</button>
         </div>
     </div>
-
+    
     <script>
         function handleEdit(event) {
             event.preventDefault(); // Prevent default form submission
