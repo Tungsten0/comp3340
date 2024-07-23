@@ -100,7 +100,7 @@ $conn->close();
                                             <option value='inventory'>Inventory</option>
                                             <option value='admin'>Admin</option>
                                            </select> </td>";
-                                echo "<td> <button onclick='approveUser(" . $puser['username'] . ")'>Approve</button> <button onclick='rejectUser(" . $puser['username'] . ")'>Reject</button> </td>";
+                                echo "<td> <button'>Approve</button> <button>Reject</button> </td>";
                             }
                         ?>
                     </tr>
