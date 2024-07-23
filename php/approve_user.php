@@ -22,14 +22,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($stmt->execute() && ($action != 'approve' || $stmt2->execute())) {
         echo "in execute";
         // Redirect without prior output
-        header('Location: ../pages/admin_dashboard.html#user_approved');
+        header('Location: ../pages/Add_User.php#user_approved');
         exit();
     } else {
         echo "in else";
         // Output should be avoided before header() call
         // You can log errors for debugging
         error_log("User approval failed: " . $stmt->error . " " . ($action == 'approve' ? $stmt2->error : ""));
-        header('Location: ../pages/admin_dashboard.html#approve_error');
+        header('Location: ../pages/Add_User.php#approve_error');
         exit();
     }
 
