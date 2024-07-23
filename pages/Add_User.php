@@ -23,6 +23,8 @@ if ($result->num_rows > 0) {
 $conn->close();
 
 if(isset($_GET['username'])) {
+    include '../config/db_connection.php';
+    
     $username = $_GET['username'];
     echo $username;
     $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
