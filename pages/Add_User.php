@@ -35,6 +35,9 @@ if(isset($_GET['username'])) {
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
+        echo $user['username'];
+        echo $user['email'];
+        echo $user['role'];
     } else {
         $user = [];
     }
