@@ -22,6 +22,7 @@ if ($result->num_rows > 0) {
 }
 $conn->close();
 
+$user = [];
 // Fetch user details if username is provided
 if(isset($_GET['username'])) {
     include '../config/db_connection.php';
@@ -187,7 +188,7 @@ if(isset($_GET['username'])) {
                     </form>
                 </div>
             <?php } ?>
-            
+
             <div id="remove-details" style="display: none;">
                 <p id="remove-user-info"></p>
                 <button type="submit" id="removeUserButton">Remove User</button>
