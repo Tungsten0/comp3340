@@ -98,7 +98,20 @@ $conn->close();
                                             <option value='inventory'>Inventory</option>
                                             <option value='admin'>Admin</option>
                                            </select> </td>";
-                                echo "<td> <button>Approve</button> <button>Reject</button> </td>";
+                                // Approve Form
+                                echo "<td>";
+                                echo "<form action='../php/approve_user.php' method='POST'>";
+                                echo "<input type='hidden' name='action' value='approve'>";
+                                echo "<input type='hidden' name='username' value='" . $puser['username'] . "'>";
+                                echo "<button type='submit'>Approve</button>";
+                                echo "</form>";
+                                // Reject Form
+                                echo "<form action='../php/approve_user.php' method='POST'>";
+                                echo "<input type='hidden' name='action' value='reject'>";
+                                echo "<input type='hidden' name='username' value='" . $puser['username'] . "'>";
+                                echo "<button type='submit'>Reject</button>";
+                                echo "</form>";
+                                echo "</td>";
                             }
                         ?>
                     </tr>
