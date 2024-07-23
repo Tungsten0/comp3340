@@ -20,7 +20,6 @@ if ($result->num_rows > 0) {
 } else {
     $pendingUsers = [];
 }
-
 $conn->close();
 
 ?>
@@ -42,7 +41,11 @@ $conn->close();
             <button class="main-button" onclick="showForm('remove')">Remove User</button>
             <button class="main-button" onclick="showUsers()">Display All Users</button>
         </div>
-
+        <?php #display all pending users
+        if (count($pendingUsers) > 0) { 
+            echo $pendingUsers;
+        }
+        ?>
         <!-- Add User Form -->
         <form action="../php/add_user.php" method="POST">
             <div id="add-user-form" class="form-container">
