@@ -43,7 +43,11 @@ $conn->close();
         </div>
         <?php #display all pending users
         if (count($pendingUsers) > 0) { 
-            echo $pendingUsers;
+            foreach ($pendingUsers as $puser) {
+                echo $puser['username'];
+                echo $puser['email'];
+                echo $puser['timestamp'];
+            }
         } else {
             echo "<p>No pending users.</p>";
         }
