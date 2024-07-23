@@ -11,18 +11,22 @@ if ($result->num_rows > 0) {
     $users = [];
 }
 
+#get all pending users
+$sql = "SELECT * FROM registration WHERE role = 'pending'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $pendingUsers = $result->fetch_all(MYSQLI_ASSOC);
+} else {
+    $pendingUsers = [];
+}
+
 $conn->close();
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php include '../components/head.php'; ?>
     <title>Pending Users</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/add_user.css">
 </head>
 
@@ -72,17 +76,48 @@ $conn->close();
             <legend>
                 <h2>Approve User:</h2>
             </legend>
+            <?php #display pending registration users
+                if (count($pendingUsers) > 0) { ?>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Registration Date</th>
+                                <th>Permissions</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pendingUserTableBody">
+                            <tr>
+                            <?php foreach ($pendingUsers as $user) { 
+                                    echo "<td>" . $user['username'] . "</td>";
+                                    echo "<td>" . $user['email'] . "</td>";
+                                    echo "<td>" . $user['registration_date'] . "</td>";
+                                    echo '<td>
+                                            <select class="permissions-dropdown">
+                                                <option value="user">User</option>
+                                                <option value="inventory">Inventory</option>
+                                                <option value="admin">Admin</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <button onclick="approveUser("john_doe")">Approve</button>
+                                            <button onclick="rejectUser("john_doe")">Reject</button>
+                                        </td>';
+                                ?> </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                    <?php } ?>
             <table>
                 <thead>
                     <tr>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Registration Date</th>
-                        <th>Permissions</th>
-                        <th>Actions</th>
+                        
                     </tr>
                 </thead>
                 <tbody id="pendingUserTableBody">
+                
                     <!-- Example User Data -->
                     <tr>
                         <td>john_doe</td>

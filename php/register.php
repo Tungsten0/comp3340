@@ -47,15 +47,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             if ($stmt->execute()) {
                 ?> <script>console.log("User added successfully.");</script> <?php
-                header('Location: /pages/login.html#user_added');
+                header('Location: ../login.html#user_added');
             } else {
                 ?> <script>console.log("User add failed: " . $stmt->error);</script> <?php
-                header('Location: /pages/register.html#add_error');
+                header('Location: ../login.html#add_error');
             }
             $stmt->close();
         } else {
             ?> <script>console.log("Preparation failed: " . $conn->error);</script> <?php
-            header('Location: /pages/register.html#prep_error');
+            header('Location: ../login.html#prep_error');
         }
     }
 }
