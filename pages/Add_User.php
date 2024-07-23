@@ -90,10 +90,10 @@ $conn->close();
                         </thead>
                         <tbody id="pendingUserTableBody">
                             <tr>
-                            <?php foreach ($pendingUsers as $user) { 
-                                    echo "<td>" . $user['username'] . "</td>";
-                                    echo "<td>" . $user['email'] . "</td>";
-                                    echo "<td>" . $user['registration_date'] . "</td>";
+                            <?php foreach ($pendingUsers as $puser) { 
+                                    echo "<td>" . $puser['username'] . "</td>";
+                                    echo "<td>" . $puser['email'] . "</td>";
+                                    echo "<td>" . $puser['registration_date'] . "</td>";
                                     echo '<td>
                                             <select class="permissions-dropdown">
                                                 <option value="user">User</option>
