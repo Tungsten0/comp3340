@@ -1,7 +1,7 @@
 <?
 #register php script
 
-if (isset($_POST['register'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     include '../config/db_connection.php';
 
     $email = $_POST['email'];

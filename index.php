@@ -10,6 +10,19 @@ if (isset($_COOKIE['uid'])) {
   // The uid cookie has been set
   $uid = $_COOKIE['uid'];
   $role = $_COOKIE['role'];
+
+  switch ($role) {
+    case 'admin':
+      echo "in admin";
+      break;
+    case 'inventory':
+      echo "in inventory";
+      break;
+    default: //default is staff
+      echo "in staff";
+      break;
+  }
+
   switch ($request) {
     case '/':
       echo "in /";
