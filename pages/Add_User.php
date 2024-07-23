@@ -110,34 +110,6 @@ $conn->close();
                         </tbody>
                     </table>
                     <?php } ?>
-            <table>
-                <thead>
-                    <tr>
-                        
-                    </tr>
-                </thead>
-                <tbody id="pendingUserTableBody">
-                
-                    <!-- Example User Data -->
-                    <tr>
-                        <td>john_doe</td>
-                        <td>john@example.com</td>
-                        <td>2024-07-21</td>
-                        <td>
-                            <select class="permissions-dropdown">
-                                <option value="user">User</option>
-                                <option value="inventory">Inventory</option>
-                                <option value="admin">Admin</option>
-                            </select>
-                        </td>
-                        <td>
-                            <button onclick="approveUser('john_doe')">Approve</button>
-                            <button onclick="rejectUser('john_doe')">Reject</button>
-                        </td>
-                    </tr>
-                    <!-- Add more rows as needed -->
-                </tbody>
-            </table>
         </div>
 
         <!-- Edit User Form -->
