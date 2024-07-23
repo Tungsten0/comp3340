@@ -41,17 +41,6 @@ $conn->close();
             <button class="main-button" onclick="showForm('remove')">Remove User</button>
             <button class="main-button" onclick="showUsers()">Display All Users</button>
         </div>
-        <?php #display all pending users
-        if (count($pendingUsers) > 0) { 
-            foreach ($pendingUsers as $puser) {
-                echo $puser['username'];
-                echo $puser['email'];
-                echo $puser['timestamp'];
-            }
-        } else {
-            echo "<p>No pending users.</p>";
-        }
-        ?>
         <!-- Add User Form -->
         <form action="../php/add_user.php" method="POST">
             <div id="add-user-form" class="form-container">
@@ -109,7 +98,7 @@ $conn->close();
                                             <option value='inventory'>Inventory</option>
                                             <option value='admin'>Admin</option>
                                            </select> </td>";
-                                echo "<td> <button'>Approve</button> <button>Reject</button> </td>";
+                                echo "<td> <button>Approve</button> <button>Reject</button> </td>";
                             }
                         ?>
                     </tr>
