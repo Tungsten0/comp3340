@@ -31,7 +31,7 @@ if(isset($_GET['username'])) {
     $stmt->bind_param("s", $username);
 
     $result = $conn->query($sql);
-    
+
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
     } else {
@@ -168,9 +168,8 @@ if(isset($_GET['username'])) {
                 <h2>Remove User:</h2>
             </legend>
             <label for="remove-username">Username:</label>
-            <input type="text" id="remove-username" required>
             <form action="Add_User.php" method="GET">
-                <input type="hidden" name="username" id="get-username">
+                <input id="remove-username" required name="username">
                 <button type="submit">Fetch User</button>
             </form>
             <div id="remove-details" style="display: none;">
