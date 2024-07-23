@@ -22,7 +22,6 @@ if ($result->num_rows > 0) {
 }
 $conn->close();
 
-$user = [];
 // Fetch user details if username is provided
 if(isset($_GET['username'])) {
     include '../config/db_connection.php';
@@ -31,18 +30,22 @@ if(isset($_GET['username'])) {
     $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
     $stmt->bind_param("s", $username);
 
-    $result = $conn->query($stmt);
+    $stmt->execute();
+    $result = $stmt->get_result(); // Get the result set from the prepared statement
+
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
-        echo $user['username'];
-        echo $user['email'];
-        echo $user['role'];
+        echo htmlspecialchars($user['username']);
+        echo htmlspecialchars($user['email']);
+        echo htmlspecialchars($user['role']);
     } else {
-        $user = [];
         echo "No user found";
     }
+
+    $stmt->close();
     $conn->close();
 }
+
 
 ?>
 
