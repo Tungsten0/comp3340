@@ -1,4 +1,4 @@
-<?
+<?php
 #register php script
 #temporarily display errors
 ini_set('display_errors', 1);
@@ -59,3 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 }
+
+?>
+
+test test
