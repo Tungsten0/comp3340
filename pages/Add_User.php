@@ -31,8 +31,7 @@ if(isset($_GET['username'])) {
     $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
     $stmt->bind_param("s", $username);
 
-    $result = $conn->query($sql);
-    echo $result;
+    $result = $conn->query($stmt);
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
         echo $user['username'];
