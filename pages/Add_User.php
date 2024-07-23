@@ -40,6 +40,7 @@ if(isset($_GET['username'])) {
         echo $user['role'];
     } else {
         $user = [];
+        echo "No user found";
     }
     $conn->close();
 }
