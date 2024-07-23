@@ -1,5 +1,5 @@
 <?php
-
+echo "in approve_user.php";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     include '../config/db_connection.php';
 
