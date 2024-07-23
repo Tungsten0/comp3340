@@ -8,12 +8,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if($action == 'approve') {
         echo "in approve";
-        $stmt = $conn->prepare("UPDATE registration SET approved = 1 WHERE username = ?");
+        $stmt = $conn->prepare("UPDATE registration SET status = 1 WHERE username = ?");
         $stmt2 = $conn->prepare("INSERT INTO users (username, password, email, first_name, last_name, role) SELECT username, password, email, first_name, last_name, role FROM registration WHERE username = ?");
         $stmt2->bind_param("s", $username);
     } else {
         echo "in disapprove";
-        $stmt = $conn->prepare("UPDATE registration SET approved = 0 WHERE username = ?");
+        $stmt = $conn->prepare("UPDATE registration SET status = 0 WHERE username = ?");
     }
 
     $stmt->bind_param("s", $username);
