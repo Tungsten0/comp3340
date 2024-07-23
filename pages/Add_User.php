@@ -172,6 +172,22 @@ if(isset($_GET['username'])) {
                 <input id="remove-username" required name="username">
                 <button type="submit">Fetch User</button>
             </form>
+            <?php
+            #display user details
+            if (isset($user)) { ?>
+                <div id="remove-details" style="display: block;">
+                    <p id="remove-user-info">
+                        <strong>Username:</strong> <?php echo htmlspecialchars($user['username']); ?><br>
+                        <strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?><br>
+                        <strong>Role:</strong> <?php echo htmlspecialchars($user['role']); ?>
+                    </p>
+                    <form action="../php/delete_user.php" method="POST">
+                        <input type="hidden" name="username" value="<?php echo $user['username']; ?>">
+                        <button type="submit" id="removeUserButton">Remove User</button>
+                    </form>
+                </div>
+            <?php } ?>
+            
             <div id="remove-details" style="display: none;">
                 <p id="remove-user-info"></p>
                 <button type="submit" id="removeUserButton">Remove User</button>
