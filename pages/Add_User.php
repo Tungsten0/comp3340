@@ -176,14 +176,13 @@ $conn->close();
                         </tr>
                     </thead>
                     <tbody id="allUsersTableBody">
+                        <?php foreach ($users as $user) { ?>
                         <tr>
-                        <?php foreach ($users as $user) { 
-                                echo "<td>" . $user['username'] . "</td>";
-                                echo "<td>" . $user['email'] . "</td>";
-                                echo "<td>" . $user['role'] . "</td>";
-                            }
-                        ?> 
+                            <td><?php echo htmlspecialchars($user['username']); ?></td>
+                            <td><?php echo htmlspecialchars($user['email']); ?></td>
+                            <td><?php echo htmlspecialchars($user['role']); ?></td>
                         </tr>
+                    <?php } ?>
                     </tbody>
                 </table>
             <?php } ?>
