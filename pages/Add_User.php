@@ -76,6 +76,8 @@ $conn->close();
             <legend>
                 <h2>Approve User:</h2>
             </legend>
+            <?php #display users
+            if (count($users) > 0) { ?>
             <table>
                 <thead>
                     <tr>
@@ -89,24 +91,22 @@ $conn->close();
                 <tbody id="pendingUserTableBody">
                     <!-- Example User Data -->
                     <tr>
-                        <td>john_doe</td>
-                        <td>john@example.com</td>
-                        <td>2024-07-21</td>
-                        <td>
-                            <select class="permissions-dropdown">
-                                <option value="user">User</option>
-                                <option value="inventory">Inventory</option>
-                                <option value="admin">Admin</option>
-                            </select>
-                        </td>
-                        <td>
-                            <button onclick="approveUser('john_doe')">Approve</button>
-                            <button onclick="rejectUser('john_doe')">Reject</button>
-                        </td>
+                        <?php foreach ($pendingUsers as $puser) { 
+                                echo "<td>" . $puser['username'] . "</td>";
+                                echo "<td>" . $puser['email'] . "</td>";
+                                echo "<td>" . $puser['timestamp'] . "</td>";
+                                echo "<td> <select class='permissions-dropdown'>
+                                            <option value='user'>User</option>
+                                            <option value='inventory'>Inventory</option>
+                                            <option value='admin'>Admin</option>
+                                           </select> </td>";
+                                echo "<td> <button onclick='approveUser(" . $puser['username'] . ")'>Approve</button> <button onclick='rejectUser(" . $puser['username'] . ")'>Reject</button> </td>";
+                            }
+                        ?>
                     </tr>
-                    <!-- Add more rows as needed -->
                 </tbody>
             </table>
+            <?php } ?>
         </div>
 
         <!-- Edit User Form -->
@@ -170,8 +170,9 @@ $conn->close();
                                 echo "<td>" . $user['username'] . "</td>";
                                 echo "<td>" . $user['email'] . "</td>";
                                 echo "<td>" . $user['role'] . "</td>";
-                             ?> </tr>
-                        <?php } ?>
+                            }
+                        ?> 
+                        </tr>
                     </tbody>
                 </table>
                 <?php } ?>
