@@ -22,6 +22,19 @@ if ($result->num_rows > 0) {
 }
 $conn->close();
 
+if(isset($_GET['username'])) {
+    $username = $_GET['username'];
+    $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+    $sql = "SELECT * FROM users WHERE username = '$username'";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+    } else {
+        $user = [];
+    }
+    $conn->close();
+}
+
 ?>
 
 <?php include '../components/head.php'; ?>
@@ -151,12 +164,15 @@ $conn->close();
             </legend>
             <label for="remove-username">Username:</label>
             <input type="text" id="remove-username" required>
-            <button type="button" onclick="fetchUserToRemove()">Fetch User</button>
+            <form action="Add_User.php" method="GET">
+                <input type="hidden" name="username" id="get-username">
+                <button type="submit">Fetch User</button>
+            </form>
             <div id="remove-details" style="display: none;">
                 <p id="remove-user-info"></p>
-                <button type="submit" id="removeUserButton" onclick="removeUser()">Remove User</button>
+                <button type="submit" id="removeUserButton">Remove User</button>
             </div>
-            <div id="remove-loading" style="display: none;">Loading...</div>
+            <!-- <div id="remove-loading" style="display: none;">Loading...</div> -->
         </div>
 
         <!-- Display All Users Form -->
