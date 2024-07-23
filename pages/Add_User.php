@@ -12,7 +12,7 @@ if ($result->num_rows > 0) {
 }
 
 #get all pending users
-$sql = "SELECT * FROM registration WHERE role = 'pending'";
+$sql = "SELECT * FROM registration WHERE status = 'pending'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
