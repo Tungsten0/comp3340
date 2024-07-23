@@ -27,10 +27,11 @@ if(isset($_GET['username'])) {
     include '../config/db_connection.php';
 
     $username = $_GET['username'];
-    $sql = "SELECT * FROM users WHERE username = ?";
-    $stmt = $conn->prepare($sql);
+    $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
     $stmt->bind_param("s", $username);
+
     $result = $conn->query($sql);
+    
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
     } else {
