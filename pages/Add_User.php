@@ -35,7 +35,7 @@ if(isset($_GET['username'])) {
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
-        #echo "<script>document.getElementById(`remove-user-form`).classList.add('active'); </script>";
+        echo "<script>document.getElementById(`remove-user-form`).classList.add('active'); </script>";
     } else {
         $user = null;
     }
