@@ -32,7 +32,7 @@ if(isset($_GET['username'])) {
     $stmt->bind_param("s", $username);
 
     $result = $conn->query($sql);
-
+    echo $result;
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
         echo $user['username'];
