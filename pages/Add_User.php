@@ -31,15 +31,13 @@ if(isset($_GET['username'])) {
     $stmt->bind_param("s", $username);
 
     $stmt->execute();
-    $result = $stmt->get_result(); // Get the result set from the prepared statement
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
-        echo htmlspecialchars($user['username']);
-        echo htmlspecialchars($user['email']);
-        echo htmlspecialchars($user['role']);
+        echo "<script>document.getElementById(`remove-user-form`).classList.add('active');";
     } else {
-        echo "No user found";
+        $user = null;
     }
 
     $stmt->close();
