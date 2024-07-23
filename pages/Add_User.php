@@ -44,6 +44,8 @@ $conn->close();
         <?php #display all pending users
         if (count($pendingUsers) > 0) { 
             echo $pendingUsers;
+        } else {
+            echo "<p>No pending users.</p>";
         }
         ?>
         <!-- Add User Form -->
