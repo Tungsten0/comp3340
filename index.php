@@ -14,6 +14,7 @@ if (isset($_COOKIE['uid'])) {
         if ($role == 'admin') {
             echo "in admin";
             include __DIR__ . '/pages/admin_dashboard.php';
+            echo "in adminaaa";
         } else if ($role == 'inventory') {
             require __DIR__ . '/pages/inventory.php';
         } else {
