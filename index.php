@@ -8,6 +8,9 @@ if (isset($_COOKIE['uid'])) {
   // The uid cookie has been set
   $uid = $_COOKIE['uid'];
   $role = $_COOKIE['role'];
+  echo "Role: " . $role;
+  echo "UID: " . $uid;
+  echo "Request: " . $request;
 
   switch ($request) {
     case '/':
