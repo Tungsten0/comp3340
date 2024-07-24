@@ -21,6 +21,9 @@ if (isset($_COOKIE['uid'])) {
             require __DIR__ . '/pages/dashboard.php';
         }
         break;
+    case '/admin_dashboard':
+        require __DIR__ . '/pages/admin_dashboard.php';
+        break;
     case '/admin_dashboard/add_user':
         require __DIR__ . '/pages/Add_User.php';
         break;
