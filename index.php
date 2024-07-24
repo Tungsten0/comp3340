@@ -24,7 +24,7 @@ if (isset($_COOKIE['uid'])) {
   switch ($request) {
     case '/':
         if ($role == 'admin') {
-          require __DIR__ . '/pages/admin_dashboard.php';
+          include __DIR__ . '/pages/admin_dashboard.php';
         } else if ($role == 'inventory') {
           require __DIR__ . '/pages/inventory.php';
         } else {
