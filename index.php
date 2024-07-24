@@ -23,8 +23,13 @@ if (isset($_COOKIE['uid'])) {
 
   switch ($request) {
     case '/':
-        echo "in /admin_dashboard";
-        require __DIR__ . '/pages/admin_dashboard.php';
+        if ($role == 'admin') {
+          require __DIR__ . '/pages/admin_dashboard.php';
+        } else if ($role == 'inventory') {
+          require __DIR__ . '/pages/inventory.php';
+        } else {
+          require __DIR__ . '/pages/dashboard.php';
+        }
         break;
     case '/admin_dashboard/add_user':
         require __DIR__ . '/pages/Add_User.php';
