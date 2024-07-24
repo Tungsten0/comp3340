@@ -8,15 +8,13 @@ if (isset($_COOKIE['uid'])) {
   // The uid cookie has been set
   $uid = $_COOKIE['uid'];
   $role = $_COOKIE['role'];
-  echo "Role: " . $role;
-  echo "UID: " . $uid;
   echo "Request: " . $request;
 
   switch ($request) {
     case '/':
         if ($role == 'admin') {
             echo "in admin";
-            include __DIR__ . '/pages/admin_dashboard.php';
+            require __DIR__ . '/pages/admin_dashboard.php';
             echo "in adminaaa";
         } else if ($role == 'inventory') {
             require __DIR__ . '/pages/inventory.php';
