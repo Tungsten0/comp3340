@@ -200,7 +200,7 @@ if(isset($_GET['username'])) {
         </div>
 
         <!-- Display All Users Form -->
-        <div id="display-users" class="form-container">
+        <div id="display-users-form" class="form-container">
             <button class="close-btn" onclick="closeForm()">x</button>
             <legend>
                 <h2>All Users:</h2>
