@@ -2,25 +2,62 @@
 #login script
 include '../config/db_connection.php';
 
-if (isset($_POST['login'])) {
-    $email = $_POST['email'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'];
     $password = $_POST['password'];
 
     //prevent sql injection
-    $email = stripcslashes($email);
+    $username = stripcslashes($username);
     $password = stripcslashes($password);
-    $email = mysqli_real_escape_string($conn, $email);
+    $username = mysqli_real_escape_string($conn, $username);
     $password = mysqli_real_escape_string($conn, $password);
 
-    $sql = "SELECT * FROM users WHERE email='$email' AND password='$password'";
-    $result = $conn->query($sql);
+    //check if username exists
+    $check_username = $conn->prepare("SELECT * FROM users WHERE username = ?");
+    $check_username->bind_param("s", $username);
+    $check_username->execute();
+    $check_username->store_result();
 
-    if ($result->num_rows > 0) {
+    //if username exists
+    if ($check_username->num_rows > 0) {
+        //retrieve user data
+        $sql = "SELECT * FROM users WHERE username='$username'";
+        $result = $conn->query($sql);
         $row = $result->fetch_assoc();
-        setcookie('user_id', $row['id'], time() + (86400 * 30), "/");
-        header('Location: /');
+
+        //unhash password and verify
+        if(password_verify($password, $row['password'])) {
+            if ($result->num_rows > 0) {
+                //set cookies user id and role
+                if(setcookie('uid', $row['user_id'], time() + (1800), "/") && setcookie('role', $row['role'], time() + (1800), "/")) {
+                    $check_username->close();
+                    $conn->close();
+                    header('Location: /');
+                } else {
+                    ?> <script>console.log("Cookies could not be set.");</script> <?php
+                    $check_username->close();
+                    $conn->close();
+                    header('Location: /login.html#cookie_error');
+                }
+            } else {
+                ?> <script>console.log("User data not found.");</script> <?php
+                $check_username->close();
+                $conn->close();
+                header('Location: /login.html#error1');
+            }
+        } else {
+            ?> <script>console.log("Password is incorrect.");</script> <?php
+            $check_username->close();
+            $conn->close();
+            header('Location: /login.html#pass_error');
+        }
     } else {
-        echo "Invalid email or password.";
-        header('Location: /pages/login.html#error');
+        ?> <script>console.log("Username does not exist.");</script> <?php
+        $check_username->close();
+        $conn->close();
+        header('Location: /login.html#uname_error');
     }
+    $check_username->close();
+    $conn->close();
+    header('Location: /login.html#error');
 }

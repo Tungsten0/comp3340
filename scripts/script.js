@@ -5,7 +5,7 @@ const btnPopup = document.querySelector('.btnLogin-popup');
 const iconClose = document.querySelector('.icon-close');
 
 var modal = document.getElementById("contactModal");
-var contactLink = document.querySelector(".navigation a:nth-child(3)");
+var contactLink = document.querySelector(".navigation a:nth-child(4)");
 var span = document.getElementsByClassName("close")[0];
 
 var aboutModal = document.getElementById("aboutModal");
@@ -24,69 +24,49 @@ function closeAboutModalFunc() {
     aboutModal.style.display = "none";
 }
 
-registerLink.addEventListener('click', ()=> {
+registerLink.addEventListener('click', () => {
     wrapper.classList.add('active');
 });
 
-loginLink.addEventListener('click', ()=> {
+loginLink.addEventListener('click', () => {
     wrapper.classList.remove('active');
 });
 
-btnPopup.addEventListener('click', ()=> {
+btnPopup.addEventListener('click', () => {
     wrapper.classList.add('active-popup');
 });
 
-iconClose.addEventListener('click', ()=> {
+iconClose.addEventListener('click', () => {
     wrapper.classList.remove('active-popup');
     wrapper.classList.remove('active');
 });
 
-contactLink.onclick = function() {
+contactLink.onclick = function () {
     modal.style.display = "block";
     closeAboutModalFunc(); // Close about modal if open
 }
 
-aboutLink.onclick = function(event) {
+aboutLink.onclick = function (event) {
     event.preventDefault();
     closeContactModal();
     aboutModal.style.display = "block";
 }
 
-closeAboutModal.onclick = function() {
+closeAboutModal.onclick = function () {
     aboutModal.style.display = "none";
 }
 
-span.onclick = function() {
+span.onclick = function () {
     modal.style.display = "none";
 }
 
-homeLink.onclick = function(event) {
+homeLink.onclick = function (event) {
     event.preventDefault();
     modal.style.display = "none";
     aboutModal.style.display = "none";
     wrapper.classList.remove('active');
     wrapper.classList.remove('active-popup');
 }
-
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('form');
-
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-
-        // Basic authentication logic (replace with server-side validation in real application)
-        if (username === 'admin' && password === 'adminpassword') {
-            window.location.href = 'admin_dashboard.html'; // Redirect admin to admin dashboard
-        } else if (username === 'user' && password === 'userpassword') {
-            window.location.href = 'dashboard.html'; // Redirect standard user to standard dashboard
-        } else {
-            alert('Invalid username or password');
-        }
-    });
-});
 
 var forgotPasswordModal = document.getElementById("forgotPasswordModal");
 
@@ -97,17 +77,17 @@ var forgotPasswordLink = document.querySelector(".forgot-password-link");
 var closeForgotPasswordModal = document.querySelector("#forgotPasswordModal .close");
 
 // When the user clicks on the link, open the modal
-forgotPasswordLink.onclick = function() {
+forgotPasswordLink.onclick = function () {
     forgotPasswordModal.style.display = "block";
 }
 
 // When the user clicks on <span> (x), close the modal
-closeForgotPasswordModal.onclick = function() {
+closeForgotPasswordModal.onclick = function () {
     forgotPasswordModal.style.display = "none";
 }
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
+window.onclick = function (event) {
     if (event.target == forgotPasswordModal) {
         forgotPasswordModal.style.display = "none";
     }
@@ -117,7 +97,7 @@ window.onclick = function(event) {
 var additionalInputBox = document.getElementById("additionalInputBox");
 var addInputBoxBtn = document.getElementById("addInputBoxBtn");
 
-addInputBoxBtn.addEventListener('click', function() {
+addInputBoxBtn.addEventListener('click', function () {
     var newInputBox = document.createElement('div');
     newInputBox.classList.add('input-box');
     newInputBox.innerHTML = `

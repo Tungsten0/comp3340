@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Group A Project</title>
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -15,10 +15,11 @@
     <nav class="navigation">
       <a href="#" id="homeLink">Home</a>
       <a href="#" id="aboutLink">About Us</a>
+      <a href="#">Services</a>
       <a href="#" id="contactLink">Contact Us</a>
-    </nav>
-    <button class="btnLogin-popup">Login</button>
 
+      <button class="btnLogin-popup">Login</button>
+    </nav>
   </header>
 
   <div class="wrapper">
@@ -29,15 +30,15 @@
     <!-- Login Form -->
     <div class="form-box login">
       <h2>Login</h2>
-      <form action="../php/login.php" method="POST">
+      <form action="php/login.php" method="POST">
         <div class="input-box">
           <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
-          <input name="email" type="email" required>
-          <label>Email</label>
+          <input type="text" name="username" required>
+          <label>Username</label>
         </div>
         <div class="input-box">
           <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-          <input name="password" type="password" required>
+          <input type="password" name="password" required>
           <label>Password</label>
         </div>
         <div class="remember-forgot">
@@ -54,24 +55,34 @@
     <!-- Registration Form -->
     <div class="form-box register">
       <h2>Registration</h2>
-      <form aaction="../php/register.php" method="POST">
+      <form action="php/register.php" method="POST">
         <div class="input-box">
           <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
-          <input type="text" required>
+          <input type="text" name="username" required>
           <label>Username</label>
         </div>
         <div class="input-box">
+          <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+          <input type="password" name="password" required>
+          <label>Password</label>
+        </div>
+        <div class="input-box">
           <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
-          <input type="email" required>
+          <input type="email" name="email" required>
           <label>Email</label>
         </div>
         <div class="input-box">
-          <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-          <input type="password" required>
-          <label>Password</label>
+          <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+          <input type="First Name" name="fname" required>
+          <label>First Name</label>
+        </div>
+        <div class="input-box">
+          <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+          <input type="Last Name" name="lname" required>
+          <label>Last Name</label>
         </div>
         <div class="remember-forgot">
-          <label><input type="checkbox"> I agree to the terms & conditions</label>
+          <label><input type="checkbox" required> I agree to the terms & conditions</label>
         </div>
         <button type="submit" class="btn">Register</button>
         <div class="login-register">
@@ -112,7 +123,7 @@
     <div class="modal-content">
       <span class="close">&times;</span>
       <h2>About Us</h2>
-      <p>This is our group project for COMP 3340. Our six members created an inventory management site that streamlines and simplifies the process of tracking and managing inventory, ensuring accuracy and efficiency. Through collaboration, we were able to work together to integrate various features and functionalities, resulting in a comprehensive and user-friendly solution.</p>
+      <p>Hello, we are a team!</p>
     </div>
   </div>
 
@@ -131,7 +142,7 @@
     </div>
   </div>
 
-  <script src="../scripts/script.js"></script>
+  <script src="scripts/script.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>

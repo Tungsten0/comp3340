@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php include '../components/head.php'; ?>
     <title>Material Handler Dashboard</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header>
@@ -17,6 +12,7 @@
                 <a href="Receive_PO.html">Add by PO</a>
                 <a href="Put_Away_Materials.html">Put Away Inventory</a>
                 <a href="Check_Inventory.html">Search Inventory</a>
+                <a href="Edit_Inventory.html">Search Inventory</a>
             </div>
         </div>
         <a href="picking_queue.html">Order Queue</a>
@@ -59,8 +55,5 @@
     }
 </script>
 
-<script src="script.js"></script>
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

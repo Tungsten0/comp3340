@@ -1,4 +1,3 @@
 <?php
 
-?>
-error page!
+echo "error page";
