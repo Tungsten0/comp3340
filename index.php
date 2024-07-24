@@ -9,26 +9,15 @@ if (isset($_COOKIE['uid'])) {
   $uid = $_COOKIE['uid'];
   $role = $_COOKIE['role'];
 
-  switch ($role) {
-    case 'admin':
-        echo "in admin";
-        break;
-    case 'inventory':
-        echo "in inventory";
-        break;
-    default: //default is staff
-        echo "in staff";
-        break;
-  }
-
   switch ($request) {
     case '/':
         if ($role == 'admin') {
-          include __DIR__ . '/pages/admin_dashboard.php';
+            echo "in admin";
+            include __DIR__ . '/pages/admin_dashboard.php';
         } else if ($role == 'inventory') {
-          require __DIR__ . '/pages/inventory.php';
+            require __DIR__ . '/pages/inventory.php';
         } else {
-          require __DIR__ . '/pages/dashboard.php';
+            require __DIR__ . '/pages/dashboard.php';
         }
         break;
     case '/admin_dashboard/add_user':
