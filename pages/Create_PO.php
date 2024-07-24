@@ -1,4 +1,4 @@
-<?php include '../php/header.php'; ?>
+<?php include '../components/head.php'; ?>
 
     <title>Create Purchase Order</title>
     <link rel="stylesheet" href="../css/create_PO.css">

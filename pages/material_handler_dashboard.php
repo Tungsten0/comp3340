@@ -1,4 +1,4 @@
-<?php include '../components/header.php'; ?>
+<?php include '../components/head.php'; ?>
     <title>Material Handler Dashboard</title>
 </head>
 <body>

@@ -1,4 +1,4 @@
-<?php include '../components/header.php'; ?>
+<?php include '../components/head.php'; ?>
     <title>Put Away Product</title>
     <link rel="stylesheet" href="../css/putaway_materials.css">
     <script>

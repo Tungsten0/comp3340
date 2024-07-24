@@ -1,4 +1,4 @@
-<?php include '../components/header.php'; ?>
+<?php include '../components/head.php'; ?>
     <title>Warehouse Management</title>
     <link rel="stylesheet" href="../css/warehouse.css">
 </head>

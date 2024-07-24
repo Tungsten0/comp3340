@@ -1,4 +1,4 @@
-<?php include '../components/header.php'; ?>
+<?php include '../components/head.php'; ?>
     <title>Add Materials to Warehouse</title>
     <link rel="stylesheet" href="../css/add_materials.css">
 

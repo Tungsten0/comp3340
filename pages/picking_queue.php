@@ -1,4 +1,4 @@
-<?php include '../components/header.php'; ?>
+<?php include '../components/head.php'; ?>
   <title>Picking Queue</title>
   <link rel="stylesheet" href="../css/picking_queue.css">
 

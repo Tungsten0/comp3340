@@ -1,4 +1,4 @@
-<?php include '../components/header.php'; ?>
+<?php include '../components/head.php'; ?>
     <title>Edit Profile</title>
     <link rel="stylesheet" href="../css/profile_edit.css">
 </head>

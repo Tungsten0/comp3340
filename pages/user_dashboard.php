@@ -1,4 +1,4 @@
-<?php include '../components/header.php'; ?>
+<?php include '../components/head.php'; ?>
     <title>Items on Order Dashboard</title>
     <link rel="stylesheet" href="../css/dashboard_style.css">
     <link rel="stylesheet" href="../css/user_dashboard.css">
