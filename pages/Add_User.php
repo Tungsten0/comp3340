@@ -303,11 +303,13 @@ if(isset($_GET['username'])) {
             console.log(`Removing user: ${username}`);
         }
 
+        */
+
         function showUsers() {
             // Display all users logic here
             document.getElementById('display-users').classList.add('active');
         }
-        */
+        
         
     </script>
 </body>
