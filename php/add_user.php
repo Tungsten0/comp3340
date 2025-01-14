@@ -39,18 +39,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt->bind_param("ssssss", $username, $password_hashed, $email, $fname, $lname, $permission);
 
             if ($stmt->execute()) {
-                echo "User added successfully.";
+                header("Location: ../pages/admin/user_control.php#user-added");
             } else {
-                echo "User add failed: " . $stmt->error;
+                header("Location: ../pages/admin/user_control.php#user-add-failed");
             }
             $stmt->close();
         } else {
-            echo "Preparation failed: " . $conn->error;
+            header("Location: ../pages/admin/user_control.php#error");
         }
     }
     $check_username->close();
     $conn->close();
 } else {
-    echo "Form not submitted.";
+    header("Location: ../index.php");
 }
-

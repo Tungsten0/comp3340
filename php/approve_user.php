@@ -16,11 +16,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($stmt->execute() && ($action != 'approve' || $stmt2->execute())) {
         // Redirect without prior output
-        header('Location: ../pages/Add_User.php#user_action_success');
+        header('Location: ../pages/admin/user_control.php#user_action_success');
         exit();
     } else {
         error_log("User approval failed: " . $stmt->error . " " . ($action == 'approve' ? $stmt2->error : ""));
-        header('Location: ../pages/Add_User.php#approve_error');
+        header('Location: ../pages/admin/user_control.php#approve_error');
         exit();
     }
 
@@ -30,5 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $conn->close();
+} else {
+    header("Location: ../index.php");
 }
-

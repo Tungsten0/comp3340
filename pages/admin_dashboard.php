@@ -1,5 +1,11 @@
-<?php include '../components/head.php'; ?>
+<?php include '../components/head.php';
+if (isset($_COOKIE['role']) && $_COOKIE['role'] === 'admin') {
+} else {
+    header('Location: ../index.php');
+    exit();
+}?>
     <title>Admin Dashboard</title>
+<link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>

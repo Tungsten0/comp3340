@@ -1,21 +1,23 @@
 <?php
-include 'db_connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $product_id = $_POST['product_id'];
-    $name = $_POST['name'];
-    $quantity = $_POST['quantity'];
-    $price = $_POST['price'];
-    $description = $_POST['description'];
+    include '../config/db_connection.php';
 
-    $sql = "UPDATE products SET name=?, quantity=?, price=?, description=? WHERE id=?";
+    $data = json_decode(file_get_contents('php://input'), true);
+
+    $number = $data['number'];
+    $name = $data['name'];
+    $quantity = $data['quantity'];
+    $price = $data['price'];
+
+    $sql = "UPDATE products SET product_name = ?, quantity = ?, price = ? WHERE product_id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sidsi", $name, $quantity, $price, $description, $product_id);
+    $stmt->bind_param("sids", $name, $quantity, $price, $number);
 
     if ($stmt->execute()) {
-        echo "Product updated successfully!";
+        header("Location: ../pages/admin/products.php#product-updated");
     } else {
-        echo "Error: " . $stmt->error;
+        header("Location: ../pages/admin/products.php#product-update-error");
     }
 
     $stmt->close();

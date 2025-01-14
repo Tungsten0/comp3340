@@ -1,65 +1,24 @@
 <?php
-// error_reporting(E_ALL);
-// ini_set('display_errors', 1);
-
-$request = $_SERVER['REQUEST_URI'];
-
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+session_start();
 if (isset($_COOKIE['uid'])) {
-  // The uid cookie has been set
-  $uid = $_COOKIE['uid'];
-  $role = $_COOKIE['role'];
-  echo "Request: " . $request;
+    // The uid cookie has been set
+    $uid = $_COOKIE['uid'];
+    $role = $_COOKIE['role'];
 
-  switch ($request) {
-    case '/':
-        if ($role == 'admin') {
-            echo "in admin";
-            require __DIR__ . '/pages/admin_dashboard.php';
-            echo "in adminaaa";
-        } else if ($role == 'inventory') {
-            require __DIR__ . '/pages/inventory.php';
-        } else {
-            require __DIR__ . '/pages/dashboard.php';
-        }
-        break;
-    case '/admin_dashboard':
-        require __DIR__ . '/pages/admin_dashboard.php';
-        break;
-    case '/admin_dashboard/add_user':
-        require __DIR__ . '/pages/Add_User.php';
-        break;
-    case '/dashboard':
-        require __DIR__ . '/pages/Dashboard.php';
-        break;
-    case '/check_inventory':
-        require __DIR__ . '/pages/Check_Inventory.php';
-        break;
-    case '/inventory':
-        require __DIR__ . '/pages/inventory.php';
-        break;
-    case '/products':
-        require __DIR__ . '/pages/products.php';
-        break;
-    case '/warehouse':
-        require __DIR__ . '/pages/warehouse.php';
-        break;
-    case '/view_PO':
-        require __DIR__ . '/pages/View_PO.php';
-        break;
-    case '/create_PO':
-        require __DIR__ . '/pages/Create_PO.php';
-        break;
-    case '/receive_PO':
-        require __DIR__ . '/pages/Receiving_PO.php';
-        break;
-    default:
-      echo "in default";
-      http_response_code(404);
-      require __DIR__ . '/pages/404.php';
-      break;
-  }
+    if ($role == 'admin') {
+        header("Location: /pages/admin_dashboard.php");
+    } elseif ($role == 'inventory') {
+        header("Location: /pages/inventory_dashboard.php");
+    } elseif ($role == 'staff') {
+        header("Location: /pages/user_dashboard.php");
+    } else {
+        http_response_code(404);
+        header("Location: /pages/404.php");
+    }
 } else {
-  // The uid cookie has not been set
-  ?> <script>console.log("User ID cookie is not set.");</script> <?php
-  header('Location: /login.html#login_not_set');
+    // The uid cookie has not been set
+    ?> <script>console.log("User ID cookie is not set.");</script> <?php
+    header('Location: login.html#login_not_set');
 }

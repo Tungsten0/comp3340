@@ -1,17 +1,19 @@
 <?php
-include 'db_connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $product_id = $_POST['product_id'];
+    include '../config/db_connection.php';
 
-    $sql = "DELETE FROM products WHERE id=?";
+    $data = json_decode(file_get_contents('php://input'), true);
+    $number = $data['number'];
+
+    $sql = "DELETE FROM products WHERE product_id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $product_id);
+    $stmt->bind_param("s", $number);
 
     if ($stmt->execute()) {
-        echo "Product deleted successfully!";
+        header("Location: ../pages/admin/products.php#product-removed");
     } else {
-        echo "Error: " . $stmt->error;
+        header("Location: ../pages/admin/products.php#product-remove-error");
     }
 
     $stmt->close();

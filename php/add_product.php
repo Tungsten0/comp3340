@@ -1,18 +1,19 @@
 <?php
-include 'db_connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    include '../config/db_connection.php';
+
+    $number = $_POST['number'];
     $name = $_POST['name'];
     $quantity = $_POST['quantity'];
     $price = $_POST['price'];
-    $description = $_POST['description'];
 
-    $sql = "INSERT INTO products (name, quantity, price, description) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO products (product_id, product_name, quantity, price) VALUES (?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sids", $name, $quantity, $price, $description);
+    $stmt->bind_param("ssid", $number, $name, $quantity, $price);
 
     if ($stmt->execute()) {
-        echo "Product added successfully!";
+        header("Location: ../pages/admin/products.php");
     } else {
         echo "Error: " . $stmt->error;
     }
